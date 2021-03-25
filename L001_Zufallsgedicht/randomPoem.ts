@@ -1,15 +1,15 @@
 namespace Poem {
 
-let subject: string[] = ["Alisson", "Nicole", "Chiara", "Marco", "Richard ", "Max" ]; //array for subject
+let subject: string[] = ["Harry", "Hermine", "Ron", "Hagrid", "Snape", "Dumbledore" ]; //array for subject
 
-let predicate: string[] = ["liebt", "hasst", "zerstört", "rührt", "läuft ", "rennt" ]; //array for predicate
+let predicate: string[] = ["braut", "liebt", "studiert", "hasst", "zaubert", "zerstört" ]; //array for predicate
 
-let object: string[] = ["ein Buch", "ein Rezept", " Lupin", "Hogwarts", "die Karte des Rumtreibers", "Dementoren" ]; //array for object
+let object: string[] = ["Zaubertränke", "den Grimm", " Lupin", "Hogwarts", "die Karte des Rumtreibers", "Dementoren" ]; //array for object
 
 //console.log(subject, praedikat, object);
 
 
-for (let i: number = 6; i > 0; i--) { //until 1 is bigger then 0 then it stops
+for (let i: number = 6; i > 1; i--) { //until 1 is bigger then 0 then it stops
     //console.log(i);
     getVerse(subject, predicate, object);
 }
@@ -27,9 +27,7 @@ function getVerse (_subject: string [], _predicate: string[], _object: string[])
    
     verse = _subject.splice(randomSubject, 1)[0] + " " + _predicate.splice(randomPredicate, 1)[0] + " " + _object.splice(randomObject, 1) [0] + " " ; //[0] is the position 0 of the Array 
 
-    console.log(verse); //Aoutput for verse just a replacement
-
-    return;
+    console.log(verse); //output for verse just a replacement
 
 }
 

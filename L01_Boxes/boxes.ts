@@ -1,4 +1,5 @@
 namespace Boxes {
+    window.onload = function (): void {
         let n: number = 5;
         let color: string;
         let x: number = 0;
@@ -36,5 +37,6 @@ namespace Boxes {
             div.style.left = _x + "px";
             div.style.top = _y + "px";
         }
+    };
 
 }

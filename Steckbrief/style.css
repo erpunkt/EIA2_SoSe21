@@ -1,0 +1,15 @@
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #ecd0d0;
+        text-decoration: none;
+    }
+    
+    a {
+        margin-top: 30px;
+        border-width: 20px;
+    }
+    
+    a:link,
+    a:visited {
+        text-decoration: none;
+    }

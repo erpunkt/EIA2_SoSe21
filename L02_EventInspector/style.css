@@ -1,0 +1,36 @@
+    body {
+        background-color: #bdd1c5;
+    }
+    
+    h1 {
+        font-family: 'Roboto', sans-serif;
+        margin-left: 90px;
+    }
+    
+    #div0 {
+        float: left;
+        height: 700px;
+        width: 500px;
+        background-color: #9daaa2;
+        margin-left: 90px;
+        border-radius: 5px;
+    }
+    
+    #div1 {
+        float: right;
+        height: 700px;
+        width: 500px;
+        background-color: #9daaa2;
+        margin-right: 90px;
+        border-radius: 5px;
+    }
+    
+    span {
+        position: fixed;
+        background-color: #bdd1c5;
+        height: 200px;
+        width: 300px;
+        border-radius: 5px;
+        border-style: solid;
+        border-width: 1px;
+    }

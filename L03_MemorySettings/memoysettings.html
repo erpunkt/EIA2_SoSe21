@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+    <script src="memory.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    
+
+<form id="form">
+<fieldset class="fsText">
+    <h1>Style your Memory</h1>
+    <div id="divCardAmount">
+    <label for="amount"> Choose Amount of Cards! From 5 to 25.  </label><br>
+<input type="number" id="amount" name="amount" min="5" max="25" value="5">
+    </div>
+    <hr/>
+    <br>
+
+    <div id="divCardSize"></div>
+    <label for="size"> Choose size of cards</label><br>
+    <input type="range" name="size" id="size" min="60" max="200" step="1">
+    </div>
+
+    <hr/>
+    <br>
+    <div id="divBackground">
+    <label for="background"> Choose Backgroundcolor</label>
+    <br>
+    <input class="backgroundcolor" type="color" id="background" name="backgorund" value="#e4c8a2" >
+    </div>
+    <hr/>
+<br>
+
+<div id="divCardsColor">
+        <label for="cardbackground"> Choose cardbackgorundcolor</label>
+        <br>
+        <input class="cardbackground" type="color" id="cardbackground" name="cardbackgorund" value="#068489" >
+    </div>
+<hr/>
+<br>
+<div id="divFontColor">
+    <label for="fontcolor"> Choose fontcolor</label>
+    <br>
+    <input class="fontcolor" type="color" id="fontcolor" name="fontcolor" value="#a9d5d6">
+</div>
+<hr/>
+<br>
+
+
+    <label> Choose a font</label><br>
+<div id="radiogroup">
+    <input type="radio" id="helvetica" name="Radiogroup" value="Helvetica">
+    <label for="helvetica"> Helvetica </label>
+    
+    <input type="radio" id="calibri" name="Radiogroup" value="Calibri">
+    <label for="calibri"> Calibri </label>
+   
+    <input type="radio" id="arial" name="Radiogroup" value="Arial">
+    <label for="arial"> Arial </label>
+</div> 
+<br>
+
+
+<button class="button" id="button" type="button" style="vertical-align:middle"> <span>START GAME</span> </button>
+</fieldset>
+</form>
+
+
+<div id="memoryField"></div>
+
+</body>
+</html>

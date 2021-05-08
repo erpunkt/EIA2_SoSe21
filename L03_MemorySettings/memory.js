@@ -133,8 +133,8 @@ var memory;
         }
     }
     function displayCards() {
-        divForm.classList.add("hidden");
         startButton.classList.add("hidden");
+        divForm.classList.add("hidden");
         amountPairs = Number(cardDetails[0]);
         for (let i = 0; i < 2; i++) {
             for (let b = 0; b < amountPairs; b++) {
@@ -145,19 +145,17 @@ var memory;
         cardField.innerHTML = "";
         document.body.style.background = cardDetails[2];
         document.body.style.fontFamily = cardDetails[5];
-        for (let index = 0; index < cardArray.length; index++) {
+        for (let i = 0; i < cardArray.length; i++) {
             let card = document.createElement("div");
             card.style.width = cardDetails[1] + "px";
             card.style.height = cardDetails[1] + "px";
             card.style.background = cardDetails[4];
             card.style.color = cardDetails[3];
-            card.innerHTML = "<span>" + cardArray[index] + "</span>";
+            card.innerHTML = "<span>" + cardArray[i] + "</span>";
             cardField.appendChild(card);
-            /*         card.addEventListener("click", flipCard); */
             let allSpans = document.querySelectorAll("span");
-            allSpans[index].classList.add("visibility");
+            allSpans[i].classList.add("visibility");
         }
-        /* add(); */
     }
 })(memory || (memory = {}));
 //# sourceMappingURL=memory.js.map

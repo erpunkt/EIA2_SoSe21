@@ -1,0 +1,24 @@
+ 
+    let startX: number = 200;
+    let startY: number = 100;
+
+ 
+ //clouds
+        crc2.beginPath();
+        crc2.moveTo(startX * Math.random(), startY * Math.random() );
+        crc2.bezierCurveTo(startX - 40 , startY + 20, startX - 40, startY + 70, startX + 60, startY + 70);
+        crc2.bezierCurveTo(startX + 80, startY + 100, startX + 150, startY + 100, startX + 170, startY + 70);
+        crc2.bezierCurveTo(startX + 250, startY + 70, startX + 250, startY + 40, startX + 220, startY + 20);
+        crc2.bezierCurveTo(startX + 260, startY - 40, startX + 200, startY - 50, startX + 170, startY - 30);
+        crc2.bezierCurveTo(startX + 150, startY - 75, startX + 80, startY - 60, startX + 80, startY - 30);
+        crc2.bezierCurveTo(startX + 30, startY - 75, startX - 20, startY - 60, startX, startY);
+
+        let grdCenterX: number = 260;
+        let grdCenterY: number = 80;
+        let grd: any = crc2.createRadialGradient(grdCenterX, grdCenterY, 10, grdCenterX, grdCenterY, 200);
+        grd.addColorStop(0, colors[pickColor]); // light blue
+        grd.addColorStop(1, "#004CB3"); // dark blue
+        crc2.fillStyle = grd;
+        crc2.fill();
+
+        crc2.closePath();

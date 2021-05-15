@@ -29,7 +29,7 @@ namespace flowerCanvas {
         drawCloud({ x: 550, y: 220 }, { x: 300, y: 100 });
         drawTree({x: 300, y: 600 * golden});
         drawRiver(posRiver, -20, -50, "#334648" , "#6a767a");
-        drawFlower({x: 300, y: 380});
+        drawFlowers({x: 300, y: 380});
  
     }
 
@@ -68,7 +68,7 @@ namespace flowerCanvas {
     }
 
 
-    function drawFlower(_position: Vector): void {
+    function drawFlowers(_position: Vector): void {
 
         //kreis und kreise dran
         //tulpe: kreis + linien
@@ -196,8 +196,8 @@ for (let i: number = 0; i < 10; i++) {
 
             crc2.fillStyle = "#293730";
             crc2.fill();
-            crc2.restore();
             crc2.closePath();
+            crc2.restore();
 
 
 

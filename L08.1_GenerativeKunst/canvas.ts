@@ -7,7 +7,7 @@ namespace randomCanvas {
 
     window.addEventListener("load", handleLoad);
     let crc2: CanvasRenderingContext2D; //crc2 = CanvasRenderingContext2D
-    let colors: string [] = ["#003f5c", "#444e86" , "#955196", "#dd5182", "#ff6e54", "#ffa600"]; //Däschner, Christina
+    let colors: string [] = ["#003f5c", "#444e86" , "#955196", "#dd5182", "#ff6e54", "#ffa600"]; //von Däschner, Christina
 
 
     

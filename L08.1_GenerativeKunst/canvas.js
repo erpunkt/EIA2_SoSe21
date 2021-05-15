@@ -3,7 +3,7 @@ var randomCanvas;
 (function (randomCanvas) {
     window.addEventListener("load", handleLoad);
     let crc2; //crc2 = CanvasRenderingContext2D
-    let colors = ["#003f5c", "#444e86", "#955196", "#dd5182", "#ff6e54", "#ffa600"]; //Däschner, Christina
+    let colors = ["#003f5c", "#444e86", "#955196", "#dd5182", "#ff6e54", "#ffa600"]; //von Däschner, Christina
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)

@@ -254,6 +254,8 @@ for (let i: number = 0; i < 10; i++) {
         gradient.addColorStop(0, "#fabb7c");
         gradient.addColorStop(golden, "#ac6d7e");
         gradient.addColorStop(1, "#5a6343");
+        
+
 
         crc2.fillStyle = gradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);

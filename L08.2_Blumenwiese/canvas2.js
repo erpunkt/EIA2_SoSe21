@@ -19,7 +19,7 @@ var flowerCanvas;
         drawCloud({ x: 550, y: 220 }, { x: 300, y: 100 });
         drawTree({ x: 300, y: 600 * golden });
         drawRiver(posRiver, -20, -50, "#334648", "#6a767a");
-        drawFlower({ x: 300, y: 380 });
+        drawFlowers({ x: 300, y: 380 });
     }
     function drawRiver(_position, _min, _max, _colorLow, _colorHigh) {
         console.log("River", _position, _min, _max);
@@ -45,7 +45,7 @@ var flowerCanvas;
         crc2.fill();
         crc2.restore();
     }
-    function drawFlower(_position) {
+    function drawFlowers(_position) {
         //kreis und kreise dran
         //tulpe: kreis + linien
         //Gänseblume
@@ -146,8 +146,8 @@ var flowerCanvas;
         crc2.lineTo(310, 155);
         crc2.fillStyle = "#293730";
         crc2.fill();
-        crc2.restore();
         crc2.closePath();
+        crc2.restore();
         //second Tree
         //trunk
         crc2.save();

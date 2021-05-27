@@ -1,14 +1,18 @@
-namespace flowerCanvas {
+namespace flowerClasses {
 
-    interface Vector {
+    export interface VectorMain {
         x: number;
         y: number;
     }
 
     window.addEventListener("load", handleLoad);
-    let crc2: CanvasRenderingContext2D; //crc2 = CanvasRenderingContext2D
-    let golden: number = 0.62;
+    export let crc2: CanvasRenderingContext2D; //crc2 = CanvasRenderingContext2D
+    export let golden: number = 0.62;
 
+    let clouds: Cloud [] = [];
+    let flowers: Flower[] = [];
+    let bees: Bee[] = [];
+    
 
     
     function handleLoad(_event: Event): void {
@@ -19,25 +23,30 @@ namespace flowerCanvas {
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d")!;
 
         let horizon: number = crc2.canvas.height * golden;
-        let posMountains: Vector = { x: 0, y: horizon };
-        let posRiver: Vector = { x: 0, y: 600 * golden };
+        let posMountains: VectorMain = { x: 0, y: horizon };
+        let posRiver: VectorMain = { x: 0, y: 600 * golden };
 
         drawBackground();
         drawSun({ x: 250, y: 100 });
         drawMountains(posMountains, 75, 200, "#686a77", "#b7c2d4");
         drawMountains(posMountains, 50, 150, "#686a77", "#c3b1bd");
-        drawCloud({ x: 550, y: 220 }, { x: 300, y: 100 });
+        drawCloud(2);
         drawTree({x: 300, y: 600 * golden});
         drawRiver(posRiver, -20, -50, "#334648" , "#6a767a");
-        drawFlowers({x: 300, y: 380});
-        drawBee({x: 200, y: 200});
+        drawFlowers(10);
+        drawBee(6);
+
+        let background: ImageData = crc2.getImageData(0, 0, 1000, 600);
+        drawFlowers(20);
+
+        window.setInterval(update, 20, background);
+
  
     }
 
 
 
-
-    function drawRiver(_position: Vector, _min: number, _max: number, _colorLow: string, _colorHigh: string): void {
+    function drawRiver(_position: VectorMain, _min: number, _max: number, _colorLow: string, _colorHigh: string): void {
         console.log("River", _position, _min, _max);
         let stepMin: number = 50;
         let stepMax: number = 150;
@@ -71,113 +80,14 @@ namespace flowerCanvas {
     }
 
 
-    function drawFlowers(_position: Vector): void {
-
-        //kreis und kreise dran
-        //tulpe: kreis + linien
-        //Gänseblume
-        //Sonnenblume
-        //rose großer kreis und darauf kleinere
-for (let i: number = 0; i < 10; i++) {
-
-    let randomX: number = 300 * Math.random() ;
-    let randomY: number = 100 * Math.random() ;
-
-    //Sunflower
-    //Stem
-    crc2.beginPath();
-    crc2.rect(_position.x + randomX, _position.y, 2, 50);
-    crc2.fillStyle = "green";
-    crc2.fill();
-
-    //Leaf
-    crc2.beginPath();
-    crc2.arc(_position.x + randomX, _position.y + 30, 10, 0, 0.5 * Math.PI);
-    crc2.fillStyle = "green"; 
-    crc2.fill();
-    crc2.closePath();
-
-    //Petals
-    crc2.beginPath();
-    crc2.arc(_position.x + 10 + randomX , _position.y, 10, 0, 2 * Math.PI);
-    crc2.arc(_position.x + randomX, _position.y  + 10, 10, 0, 2 * Math.PI);
-    crc2.arc(_position.x - 10 + randomX , _position.y, 10, 0, 2 * Math.PI);
-    crc2.arc(_position.x + randomX, _position.y - 10 , 10, 0, 2 * Math.PI);
-    crc2.fillStyle = "yellow"; 
-    crc2.fill();
-    crc2.closePath();
-
-    //Seeds
-    crc2.beginPath();
-    crc2.arc(_position.x + randomX, _position.y, 10, 0, 2 * Math.PI);
-    crc2.fillStyle = "brown";
-    crc2.fill();
-    crc2.closePath();
-
-
-
-
-    //Daisys
-    //Stem
-    crc2.beginPath();
-    crc2.rect(_position.x  + randomX * 2 , _position.y + 8 + randomY, 2, 30);
-    crc2.fillStyle = "green";
-    crc2.fill();
-
-    //Leaf
-    crc2.beginPath();
-    crc2.arc(_position.x + 2 + randomX * 2 , _position.y + 13 + randomY, 5, 0, 0.5 * Math.PI);
-    crc2.fillStyle = "green"; 
-    crc2.fill();
-    crc2.closePath();
-
-    //Petals
-    crc2.beginPath();
-    crc2.arc(_position.x + 5 + randomX * 2 , _position.y + randomY, 5, 0, 2 * Math.PI);
-    crc2.arc(_position.x + randomX * 2, _position.y  + 5 + randomY, 5, 0, 2 * Math.PI);
-    crc2.arc(_position.x - 5 + randomX * 2 , _position.y + randomY, 5, 0, 2 * Math.PI);
-    crc2.arc(_position.x + randomX * 2, _position.y - 5 + randomY , 5, 0, 2 * Math.PI);
-    crc2.fillStyle = "white"; 
-    crc2.fill();
-    crc2.closePath();
-
-    //Blossoms
-    crc2.beginPath();
-    crc2.arc(_position.x + randomX * 2, _position.y + randomY, 5, 0, 2 * Math.PI);
-    crc2.fillStyle = "yellow";
-    crc2.fill();
-    crc2.closePath();
-
-
-
-//Roses
-//Stem
-    crc2.beginPath();
-    crc2.rect(_position.x + randomX * 3, _position.y + 10 + randomY, 2, 20);
-    crc2.fillStyle = "green";
-    crc2.fill();
-
-//Leaf
-    crc2.beginPath();
-    crc2.arc(_position.x + 2 + randomX * 3, _position.y + 10 + randomY, 8, 0, 0.5 * Math.PI);
-    crc2.fillStyle = "green"; 
-    crc2.fill();
-    crc2.closePath();
-
-//Petal
-    crc2.beginPath();
-    crc2.arc(_position.x + 1 + randomX * 3, _position.y + 5 + randomY, 7, 0, 1 * Math.PI);
-    crc2.fillStyle = "red";
-    crc2.fill();
-    crc2.closePath();
-
-
-
+    function drawFlowers(_nFlower: number): void {
+        for (let i: number = 0; i < _nFlower; i++) {
+            let flower: Flower = new Flower();
+            flowers.push(flower);
+        }
 
 }
-
-}
-    function drawTree(_position: Vector): void {    
+    function drawTree(_position: VectorMain): void {    
 //first Tree
     //Trunk
             crc2.save();
@@ -264,7 +174,7 @@ for (let i: number = 0; i < 10; i++) {
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
     }
 
-    function drawSun(_position: Vector): void {
+    function drawSun(_position: VectorMain): void {
         console.log("Sun", _position);
 
         let r1: number = 50;
@@ -283,34 +193,15 @@ for (let i: number = 0; i < 10; i++) {
     }
 
 
-    function drawCloud(_position: Vector, _size: Vector): void {
-        console.log("Cloud", _position, _size);
-
-        let nParticles: number = 20;
-        let radiusParticle: number = 100;
-        let particle: Path2D = new Path2D();
-        let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
-
-        particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-        gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.5)");
-        gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
-
-        crc2.save();
-        crc2.translate(_position.x, _position.y);
-        crc2.fillStyle = gradient;
-
-        for (let drawn: number = 0; drawn < nParticles; drawn++) {
-            crc2.save();
-            let x: number = (Math.random() - 0.5) * _size.x;
-            let y: number = - (Math.random() * _size.y);
-            crc2.translate(x, y);
-            crc2.fill(particle);
-            crc2.restore();
+    function drawCloud(_nCloud: number): void {
+        for (let i: number = 0; i < _nCloud; i++) {
+            let cloud: Cloud = new Cloud();
+            clouds.push(cloud);
         }
-        crc2.restore();
+
     }
 
-    function drawMountains(_position: Vector, _min: number, _max: number, _colorLow: string, _colorHigh: string): void {
+    function drawMountains(_position: VectorMain, _min: number, _max: number, _colorLow: string, _colorHigh: string): void {
         console.log("Mountains", _position, _min, _max);
         let stepMin: number = 50;
         let stepMax: number = 150;
@@ -343,45 +234,46 @@ for (let i: number = 0; i < 10; i++) {
         crc2.restore();
     }
 
- 
-
-      
-    function drawBee(_position: Vector): void {
-            for (let i: number = 0; i < 1; i++) {
-    
-           
-    let randomX: number = 300 * Math.random() ;
-
-
-
-
-    //Seeds
-    crc2.beginPath();
-    crc2.ellipse(_position.x + randomX, _position.y, 10, 8, 10, 10, 1 * Math.PI);
-    crc2.fillStyle = "#FFA81E";
-    crc2.fill();
-    crc2.closePath();
-
-    //Wing
-    crc2.beginPath();
-    crc2.arc(_position.x + 3 + randomX, _position.y - 7, 10, 0, 0.7 * Math.PI);
-    crc2.fillStyle = "lightblue"; 
-    crc2.fill();
-    crc2.closePath();
-    
-    //eye
-
-    crc2.beginPath();
-    crc2.arc(_position.x - 4 + randomX, _position.y - 5, 1, 0, 2 * Math.PI);
-    crc2.fillStyle = "black"; 
-    crc2.fill();
-    crc2.closePath();
-
+    function drawBee(_nBee: number): void {
+        for (let i: number = 0; i < _nBee; i++) {
+            let bee: Bee = new Bee();
+            bees.push(bee);
         }
-        
-
-        }
-
-
 
 }
+
+    
+
+
+    function update(_background: ImageData): void {
+
+    // console.log("updated");
+    crc2.putImageData(_background, 0, 0);
+
+    for (let cloud of clouds) {
+        cloud.move(1);
+        cloud.draw();
+        }
+
+    for (let flower of flowers) {
+    flower.move(1);
+    flower.draw();
+    }
+
+    for (let bee of bees) {
+        bee.move(1);
+        bee.draw();
+        }
+
+    
+}
+
+
+
+
+    }
+    
+
+
+
+

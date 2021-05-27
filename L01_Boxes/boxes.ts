@@ -4,6 +4,7 @@ namespace Boxes {
         let color: string;
         let x: number = 0;
         let y: number = 0;
+        
         for (let i: number = 0; i < n; i++) {
             y += (i == 2) ? 20 : 50; //if i =2 --> y+20  if not y+ 50
             x = (x + 170) % 400; //how often do 170 fit in 400? 3 Times = 340 R 60

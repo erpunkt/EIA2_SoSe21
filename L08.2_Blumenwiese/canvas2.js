@@ -20,6 +20,7 @@ var flowerCanvas;
         drawTree({ x: 300, y: 600 * golden });
         drawRiver(posRiver, -20, -50, "#334648", "#6a767a");
         drawFlowers({ x: 300, y: 380 });
+        drawBee({ x: 200, y: 200 });
     }
     function drawRiver(_position, _min, _max, _colorLow, _colorHigh) {
         console.log("River", _position, _min, _max);
@@ -251,6 +252,29 @@ var flowerCanvas;
         crc2.fillStyle = gradient;
         crc2.fill();
         crc2.restore();
+    }
+    function drawBee(_position) {
+        for (let i = 0; i < 1; i++) {
+            let randomX = 300 * Math.random();
+            //Seeds
+            crc2.beginPath();
+            crc2.ellipse(_position.x + randomX, _position.y, 10, 8, 10, 10, 1 * Math.PI);
+            crc2.fillStyle = "#FFA81E";
+            crc2.fill();
+            crc2.closePath();
+            //Wing
+            crc2.beginPath();
+            crc2.arc(_position.x + 3 + randomX, _position.y - 7, 10, 0, 0.7 * Math.PI);
+            crc2.fillStyle = "lightblue";
+            crc2.fill();
+            crc2.closePath();
+            //eye
+            crc2.beginPath();
+            crc2.arc(_position.x - 4 + randomX, _position.y - 5, 1, 0, 2 * Math.PI);
+            crc2.fillStyle = "black";
+            crc2.fill();
+            crc2.closePath();
+        }
     }
 })(flowerCanvas || (flowerCanvas = {}));
 //# sourceMappingURL=canvas2.js.map

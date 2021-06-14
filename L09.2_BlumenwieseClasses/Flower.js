@@ -2,6 +2,11 @@
 var flowerClasses;
 (function (flowerClasses) {
     class Flower {
+        type;
+        color;
+        position;
+        size;
+        velocity;
         constructor() {
             console.log("constructed");
             let x = 300 * Math.random();

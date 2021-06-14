@@ -2,6 +2,9 @@
 var flowerClasses;
 (function (flowerClasses) {
     class Bee {
+        color;
+        position;
+        velocity;
         constructor() {
             let x = 1000 * Math.random();
             let y = 600 * Math.random();

@@ -1,6 +1,6 @@
 "use strict";
-var flowerClasses;
-(function (flowerClasses) {
+var flower10;
+(function (flower10) {
     class Vector {
         x;
         y;
@@ -19,13 +19,7 @@ var flowerClasses;
             this.x += _addend.x;
             this.y += _addend.y;
         }
-        // Geschwindigkeit zufällig berechnen & Richtung festlegen
-        random(_minLength, _maxLength) {
-            let length = _minLength = Math.random() * (_maxLength - _minLength);
-            // this.set(0, 10);
-            this.scale(length);
-        }
     }
-    flowerClasses.Vector = Vector;
-})(flowerClasses || (flowerClasses = {}));
+    flower10.Vector = Vector;
+})(flower10 || (flower10 = {}));
 //# sourceMappingURL=Vector.js.map

@@ -2,6 +2,11 @@
 var flowerClasses;
 (function (flowerClasses) {
     class Cloud {
+        type;
+        color;
+        position;
+        velocity;
+        size;
         constructor() {
             let x = 1000 * Math.random();
             let y = 50;
@@ -17,9 +22,9 @@ var flowerClasses;
                 this.position.x += flowerClasses.crc2.canvas.width;
         }
         draw() {
-            flowerClasses.crc2.fillStyle = "white";
             flowerClasses.crc2.beginPath();
             flowerClasses.crc2.arc(this.position.x + this.size, this.position.y, this.size, 0, 2 * Math.PI);
+            flowerClasses.crc2.fillStyle = "white";
             flowerClasses.crc2.fill();
             flowerClasses.crc2.closePath();
             flowerClasses.crc2.beginPath();

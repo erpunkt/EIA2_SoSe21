@@ -4,9 +4,6 @@ var flower10;
     class Bee extends flower10.Moveable {
         position;
         velocity;
-        colorbody;
-        colorwing;
-        coloreye;
         size = 10;
         constructor(_size, _position) {
             super(_position);
@@ -22,26 +19,23 @@ var flower10;
             this.velocity = new flower10.Vector(a, b);
         }
         draw() {
-            this.colorbody = "yellow";
-            this.colorwing = "lightblue";
-            this.coloreye = "black";
             this.size = 10;
             //Body
             flower10.crc2.beginPath();
             flower10.crc2.ellipse(this.position.x, this.position.y, 10, 8, 10, 10, 1 * Math.PI);
-            flower10.crc2.fillStyle = this.colorbody;
+            flower10.crc2.fillStyle = "yellow";
             flower10.crc2.fill();
             flower10.crc2.closePath();
             //Wing
             flower10.crc2.beginPath();
             flower10.crc2.arc(this.position.x + 3, this.position.y - 7, this.size, 0, 0.7 * Math.PI);
-            flower10.crc2.fillStyle = this.colorwing;
+            flower10.crc2.fillStyle = "lightblue";
             flower10.crc2.fill();
             flower10.crc2.closePath();
             //eye
             flower10.crc2.beginPath();
             flower10.crc2.arc(this.position.x - 4, this.position.y - 5, 1, 0, 2 * Math.PI);
-            flower10.crc2.fillStyle = this.coloreye;
+            flower10.crc2.fillStyle = "black";
             flower10.crc2.fill();
             flower10.crc2.closePath();
         }

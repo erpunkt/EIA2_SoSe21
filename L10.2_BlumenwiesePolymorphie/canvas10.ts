@@ -32,8 +32,8 @@ namespace flower10 {
 
         let background: ImageData = crc2.getImageData(0, 0, 1000, 600);
 
-        drawFlower(10);
-        drawBee(6);
+        drawFlower(15);
+        drawBee(15);
         drawCloud(2);
 
 

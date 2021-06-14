@@ -7,14 +7,14 @@ var flower10;
         colorbody;
         colorwing;
         coloreye;
-        size;
+        size = 10;
         constructor(_size, _position) {
             super(_position);
-            let x = 800;
+            let x = 500;
             let y = 400;
             //Speed & Direction
             let a = -Math.random() * 2;
-            let b = Math.random() * 2;
+            let b = -Math.random() * 2;
             if (_position)
                 this.position = _position;
             else

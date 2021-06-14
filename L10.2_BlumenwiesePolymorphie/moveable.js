@@ -12,7 +12,7 @@ var flower10;
             this.position = new flower10.Vector(x, y);
             //Geschwindigkeit und Richtung
             // let a: number = - Math.random() * 2; //-damit sie nach links "laufen"
-            this.velocity = new flower10.Vector(1, 0);
+            this.velocity = new flower10.Vector(2, 0);
         }
         move(_timeslice) {
             this.position.add(this.velocity);

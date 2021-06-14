@@ -13,7 +13,7 @@ namespace flower10 {
 
             //Geschwindigkeit und Richtung
             // let a: number = - Math.random() * 2; //-damit sie nach links "laufen"
-            this.velocity = new Vector(1, 0);     
+            this.velocity = new Vector(2, 0);     
         }
 
         move(_timeslice: number): void {

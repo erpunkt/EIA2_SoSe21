@@ -8,21 +8,10 @@ var flower10;
         size;
         velocity;
         constructor() {
-            console.log("constructed");
+            // console.log("constructed");
             let x = 300 * Math.random();
             let y = 100 * flower10.golden * Math.random() + 600 * flower10.golden;
             this.position = new flower10.Vector(x, y);
-            //Speed & Direction
-            let a = -Math.random(); //-damit sie nach links "laufen"
-            let b = Math.random();
-            this.velocity = new flower10.Vector(a, b);
-        }
-        move(_timeslice) {
-            this.position.add(this.velocity);
-            if (this.position.x < 0)
-                this.position.x += flower10.crc2.canvas.width;
-            if (this.position.y > 600)
-                this.position.y -= 200;
         }
         draw() {
             //Sunflower

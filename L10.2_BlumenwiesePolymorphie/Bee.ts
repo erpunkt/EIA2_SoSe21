@@ -7,19 +7,19 @@ velocity: Vector;
 colorbody: string;
 colorwing: string;
 coloreye: string;
-size: number;
+size: number = 10;
 
 
 constructor(_size?: number, _position?: Vector) {
     super(_position);
-    let x: number = 800;
+    let x: number = 500;
     let y: number = 400;
     
     
     //Speed & Direction
     
-    let a: number = - Math.random() * 2; 
-    let b: number = Math.random() * 2;
+    let a: number = -Math.random() * 2; 
+    let b: number = -Math.random() * 2;
 
 
 

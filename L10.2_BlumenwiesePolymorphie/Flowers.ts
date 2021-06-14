@@ -8,30 +8,16 @@ namespace flower10 {
     velocity: Vector;
     
     constructor() {
-    console.log("constructed");
+    // console.log("constructed");
     let x: number = 300 * Math.random();
     let y: number = 100 * golden * Math.random() + 600 * golden;
     this.position = new Vector (x, y);
     
-    
-    //Speed & Direction
-    
-    let a: number = - Math.random(); //-damit sie nach links "laufen"
-    let b: number = Math.random();
-    this.velocity = new Vector (a, b);
+
     }
     
     
-    move(_timeslice: number): void {
-    this.position.add(this.velocity);
-    
-    if (this.position.x < 0)
-    this.position.x += crc2.canvas.width;
-    
-    if (this.position.y > 600)
-    this.position.y -= 200;
-    
-    } 
+
     
     
     draw(): void {

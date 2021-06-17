@@ -6,6 +6,7 @@ namespace flower10 {
     position: Vector;
     size: number;
     velocity: Vector;
+  
     
     constructor() {
     // console.log("constructed");
@@ -110,12 +111,12 @@ namespace flower10 {
             crc2.fillStyle = "red";
             crc2.fill();
             crc2.closePath();
-    
+   
     
     
     }
     
-    
+
     
     }
     

@@ -20,7 +20,7 @@ export abstract class Flower {
 
 public fillNectar(): void {
     if (this.nectarLiter < 25) {
-        this.nectarLiter += 1;
+        this.nectarLiter += 0.2;
         }
     }
 

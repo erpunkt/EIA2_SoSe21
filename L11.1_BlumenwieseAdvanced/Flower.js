@@ -15,7 +15,7 @@ var flower11;
         }
         fillNectar() {
             if (this.nectarLiter < 25) {
-                this.nectarLiter += 1;
+                this.nectarLiter += 0.2;
             }
         }
         draw() {

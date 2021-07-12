@@ -1,0 +1,28 @@
+body{
+    justify-content: center;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+canvas {
+border: 15px;
+border-color: black;
+border-style: double;
+
+}
+
+#formField{
+font-size: 20px;
+float: left;
+margin-left: 10%;
+margin-top: 7%;
+margin-right: 0%;
+border-color: black;
+border-style: double;
+border-radius: 2%;
+border-top: 2%;
+}
+
+footer {
+margin-top: 10%;
+}

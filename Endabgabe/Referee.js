@@ -3,7 +3,7 @@ var Soccer;
 (function (Soccer) {
     class Referee extends Soccer.Moveable {
         color;
-        position;
+        // protected position: Vector;
         velocity;
         constructor(_position) {
             super(_position);

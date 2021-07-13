@@ -2,8 +2,8 @@
 var Soccer;
 (function (Soccer) {
     class Ball extends Soccer.Moveable {
+        static position;
         color;
-        position;
         velocity;
         constructor(_position) {
             super(_position);

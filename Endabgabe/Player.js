@@ -8,6 +8,7 @@ var Soccer;
         radius;
         position;
         velocity;
+        velocity2;
         distance;
         angle;
         jerseynumber;
@@ -48,6 +49,11 @@ var Soccer;
                 this.angle = radi / Math.PI * 180;
                 this.velocity.x = (posX / this.distance) * this.velocity.x;
                 this.velocity.y = (posY / this.distance) * this.velocity.y;
+                let position = new Soccer.Vector(posX, posY);
+                position.scale(this.velocity2 / radi);
+                this.position.add(position);
+                if (radi <= 5)
+                    Soccer.playerAction = Soccer.ActionPl.KICK_BALL;
             }
         }
         move(_timeslice) {

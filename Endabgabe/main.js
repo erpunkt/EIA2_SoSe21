@@ -2,12 +2,19 @@
 // Zusammen mit Julia Käppeler & Karen Josten erarbeitet
 var Soccer;
 (function (Soccer) {
+    let ActionPl;
+    (function (ActionPl) {
+        ActionPl[ActionPl["GOTO_BALL"] = 0] = "GOTO_BALL";
+        ActionPl[ActionPl["KICK_BALL"] = 1] = "KICK_BALL";
+        ActionPl[ActionPl["CHANGE_PLAYER"] = 2] = "CHANGE_PLAYER";
+    })(ActionPl = Soccer.ActionPl || (Soccer.ActionPl = {}));
     window.addEventListener("load", handleLoad);
     let moveables = [];
     let player = [];
     let form;
     let startButton;
     let ball;
+    Soccer.playerAction = ActionPl.GOTO_BALL;
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         Soccer.crc2 = canvas.getContext("2d");
@@ -33,6 +40,8 @@ var Soccer;
             // console.log(FormData yerseycolor.value);
         }
     }
+    function getClickPosition(_event) {
+    }
     // function createPlayer(nPlayer: number): void {
     //     for (let i: number = 0; i < nPlayer; i++) {
     //         let player: Player = new Player(); 
@@ -49,7 +58,7 @@ var Soccer;
                 player1Team1.colorTeamOne = player[0];
                 player1Team1.position.x = 90;
                 player1Team1.position.y = 90;
-                player1Team1.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player1Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player1Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player1Team1);
             }
@@ -58,7 +67,7 @@ var Soccer;
                 player2Team2.colorTeamOne = player[0];
                 player2Team2.position.x = 150;
                 player2Team2.position.y = 150;
-                player2Team2.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player2Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player2Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player2Team2);
             }
@@ -67,7 +76,7 @@ var Soccer;
                 player3Team1.colorTeamOne = player[0];
                 player3Team1.position.x = 210;
                 player3Team1.position.y = 210;
-                player3Team1.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player3Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player3Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player3Team1);
             }
@@ -76,7 +85,7 @@ var Soccer;
                 player4Team1.colorTeamOne = player[0];
                 player4Team1.position.x = 270;
                 player4Team1.position.y = 270;
-                player4Team1.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player4Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player4Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player4Team1);
             }
@@ -85,7 +94,7 @@ var Soccer;
                 player5Team1.colorTeamOne = player[0];
                 player5Team1.position.x = 330;
                 player5Team1.position.y = 330;
-                player5Team1.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player5Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player5Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player5Team1);
             }
@@ -94,7 +103,7 @@ var Soccer;
                 player6Team1.colorTeamOne = player[0];
                 player6Team1.position.x = 330;
                 player6Team1.position.y = 390;
-                player6Team1.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player6Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player6Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player6Team1);
             }
@@ -103,7 +112,7 @@ var Soccer;
                 player7Team1.colorTeamOne = player[0];
                 player7Team1.position.x = 270;
                 player7Team1.position.y = 450;
-                player7Team1.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player7Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player7Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player7Team1);
             }
@@ -112,7 +121,7 @@ var Soccer;
                 player8Team1.colorTeamOne = player[0];
                 player8Team1.position.x = 210;
                 player8Team1.position.y = 510;
-                player8Team1.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player8Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player8Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player8Team1);
             }
@@ -121,7 +130,7 @@ var Soccer;
                 player9Team1.colorTeamOne = player[0];
                 player9Team1.position.x = 150;
                 player9Team1.position.y = 570;
-                player9Team1.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player9Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player9Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player9Team1);
             }
@@ -130,7 +139,7 @@ var Soccer;
                 player10Team1.colorTeamOne = player[0];
                 player10Team1.position.x = 200;
                 player10Team1.position.y = 200;
-                player10Team1.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player10Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player10Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player10Team1);
             }
@@ -139,7 +148,7 @@ var Soccer;
                 player11Team1.colorTeamOne = player[0];
                 player11Team1.position.x = 320;
                 player11Team1.position.y = 320;
-                player11Team1.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player11Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player11Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player11Team1);
             }
@@ -148,7 +157,7 @@ var Soccer;
                 player1Team2.colorTeamTwo = player[1];
                 player1Team2.position.x = 980;
                 player1Team2.position.y = 90;
-                player1Team2.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player1Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player1Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player1Team2);
             }
@@ -157,7 +166,7 @@ var Soccer;
                 player2Team2.colorTeamTwo = player[1];
                 player2Team2.position.x = 930;
                 player2Team2.position.y = 150;
-                player2Team2.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player2Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player2Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player2Team2);
             }
@@ -166,7 +175,7 @@ var Soccer;
                 player3Team2.colorTeamTwo = player[1];
                 player3Team2.position.x = 850;
                 player3Team2.position.y = 230;
-                player3Team2.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player3Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player3Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player3Team2);
             }
@@ -175,7 +184,7 @@ var Soccer;
                 player4Team2.colorTeamTwo = player[1];
                 player4Team2.position.x = 810;
                 player4Team2.position.y = 290;
-                player4Team2.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player4Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player4Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player4Team2);
             }
@@ -184,7 +193,7 @@ var Soccer;
                 player5Team2.colorTeamTwo = player[1];
                 player5Team2.position.x = 770;
                 player5Team2.position.y = 350;
-                player5Team2.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player5Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player5Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player5Team2);
             }
@@ -193,7 +202,7 @@ var Soccer;
                 player6Team2.colorTeamTwo = player[1];
                 player6Team2.position.x = 710;
                 player6Team2.position.y = 410;
-                player6Team2.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player6Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player6Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player6Team2);
             }
@@ -202,7 +211,7 @@ var Soccer;
                 player7Team2.colorTeamTwo = player[1];
                 player7Team2.position.x = 660;
                 player7Team2.position.y = 400;
-                player7Team2.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player7Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player7Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player7Team2);
             }
@@ -211,7 +220,7 @@ var Soccer;
                 player8Team2.colorTeamTwo = player[1];
                 player8Team2.position.x = 660;
                 player8Team2.position.y = 300;
-                player8Team2.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player8Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player8Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player8Team2);
             }
@@ -220,7 +229,7 @@ var Soccer;
                 player9Team2.colorTeamTwo = player[1];
                 player9Team2.position.x = 660;
                 player9Team2.position.y = 90;
-                player9Team2.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player9Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player9Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player9Team2);
             }
@@ -229,7 +238,7 @@ var Soccer;
                 player10Team2.colorTeamTwo = player[1];
                 player10Team2.position.x = 550;
                 player10Team2.position.y = 100;
-                player10Team2.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player10Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player10Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player10Team2);
             }
@@ -238,7 +247,7 @@ var Soccer;
                 player11Team2.colorTeamOne = player[1];
                 player11Team2.position.x = 500;
                 player11Team2.position.y = 230;
-                player11Team2.velocity = new Soccer.Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+                player11Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player11Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player11Team2);
             }
@@ -352,8 +361,17 @@ var Soccer;
         let posBall = ball.position;
         for (let moveable of moveables) {
             moveable.draw();
-            moveable.move(1);
-            moveable.moveToBall(posBall);
+        }
+        switch (Soccer.playerAction) {
+            case ActionPl.GOTO_BALL:
+                for (let moveable of moveables) {
+                    moveable.draw();
+                    moveable.move(1);
+                    moveable.moveToBall(posBall);
+                }
+                break;
+            case ActionPl.KICK_BALL:
+            case ActionPl.CHANGE_PLAYER:
         }
     }
 })(Soccer || (Soccer = {}));

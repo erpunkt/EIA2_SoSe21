@@ -66,6 +66,11 @@ function handleChange(_event: Event): void {
         }
 
 
+function getClickPosition(_event: Event): void {
+
+    
+}
+
     // function createPlayer(nPlayer: number): void {
     //     for (let i: number = 0; i < nPlayer; i++) {
     //         let player: Player = new Player(); 
@@ -483,7 +488,7 @@ function update (_soccerField: ImageData): void {
                crc2.putImageData(_soccerField, 0, 0);
                let posBall: Vector = ball.position;
 
-               for (let moveable of moveables){
+               for (let moveable of moveables) {
                 moveable.draw();
                 }
 

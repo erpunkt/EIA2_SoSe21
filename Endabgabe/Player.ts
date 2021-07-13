@@ -2,12 +2,14 @@
 namespace Soccer {
     export class Player extends Moveable { 
     
+    
     public precision: number;
     public colorTeamOne: string;
     public colorTeamTwo: string;
     public radius: number;
     public position: Vector;
     public velocity: Vector;
+    public velocity2: number;
     protected distance: number;
     protected angle: number;
     protected jerseynumber: number;
@@ -60,7 +62,9 @@ public moveToBall(_positionBall: Vector): void {
     this.velocity.y = (posY / this.distance) * this.velocity.y;
 
     let position: Vector = new Vector (posX, posY);
-    position.scale(velocity / radi);
+    position.scale(this.velocity2 / radi);
+
+    this.position.add(position);
     }
     }
 

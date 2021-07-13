@@ -1,21 +1,30 @@
 // Zusammen mit Julia Käppeler & Karen Josten erarbeitet
 namespace Soccer {
 
-    window.addEventListener("load", handleLoad);
-    export let crc2: CanvasRenderingContext2D; //crc2 = CanvasRenderingContext2D
+
+export enum ActionPl {
+    CHASE_BALL,
+    SHOOT_BALL,
+    CHANGE_PLAYER
+}
+
+
+window.addEventListener("load", handleLoad);
+export let crc2: CanvasRenderingContext2D; //crc2 = CanvasRenderingContext2D
    
-    let moveables: Moveable[] = [];
-    let player: string [] = [];
+let moveables: Moveable[] = [];
+let player: string [] = [];
 
-    let form: HTMLElement;
-    let startButton: HTMLElement;
+let form: HTMLElement;
+let startButton: HTMLElement;
 
-    let ball: Ball;
-    
+let ball: Ball;
+
+let playerAction: ActionPl = ActionPl.CHASE_BALL;
     
    
        
-    function handleLoad(_event: Event): void {
+function handleLoad(_event: Event): void {
            
            let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
            
@@ -43,7 +52,7 @@ namespace Soccer {
 
     }
 
-    function handleChange(_event: Event): void {
+function handleChange(_event: Event): void {
         _event.preventDefault();
         let formData: FormData = new FormData(document.forms[0]);
         player = [];
@@ -63,7 +72,7 @@ namespace Soccer {
     //     }
     // }
 
-    function createPlayer(): void {
+function createPlayer(): void {
     let element: HTMLInputElement = <HTMLInputElement> document.getElementById("startButton");
     element.disabled = true;
     for (let i: number = 0; i < 22; i++) {
@@ -75,7 +84,7 @@ if ( i == 0) {
     player1Team1.position.x = 90;
     player1Team1.position.y = 90;
     
-    player1Team1.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player1Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player1Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
     moveables.push(player1Team1);
 }
@@ -86,7 +95,7 @@ if ( i == 1) {
     player2Team2.position.x = 150;
     player2Team2.position.y = 150;
 
-    player2Team2.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player2Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player2Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));   
     moveables.push(player2Team2); 
 }
@@ -97,7 +106,7 @@ if ( i == 2) {
     player3Team1.position.x = 210;
     player3Team1.position.y = 210;
 
-    player3Team1.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player3Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player3Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5])); 
     moveables.push(player3Team1);  
 }
@@ -108,7 +117,7 @@ if ( i == 3) {
     player4Team1.position.x = 270;
     player4Team1.position.y = 270;
     
-    player4Team1.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player4Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player4Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));  
     moveables.push(player4Team1); 
 }
@@ -119,7 +128,7 @@ if ( i == 4) {
     player5Team1.position.x = 330;
     player5Team1.position.y = 330;
    
-    player5Team1.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player5Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player5Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));  
 
     moveables.push(player5Team1); 
@@ -131,7 +140,7 @@ if ( i == 5) {
     player6Team1.position.x = 330;
     player6Team1.position.y = 390;
     
-    player6Team1.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player6Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player6Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));  
 
     moveables.push(player6Team1); 
@@ -143,7 +152,7 @@ if ( i == 6) {
     player7Team1.position.x = 270;
     player7Team1.position.y = 450;
 
-    player7Team1.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player7Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player7Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));  
 
     moveables.push(player7Team1); 
@@ -155,7 +164,7 @@ if ( i == 7) {
     player8Team1.position.x = 210;
     player8Team1.position.y = 510;
     
-    player8Team1.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player8Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player8Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));  
 
     moveables.push(player8Team1); 
@@ -167,7 +176,7 @@ if ( i == 8) {
     player9Team1.position.x = 150;
     player9Team1.position.y = 570;
     
-    player9Team1.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player9Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player9Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));  
 
     moveables.push(player9Team1); 
@@ -179,7 +188,7 @@ if ( i == 9) {
     player10Team1.position.x = 200;
     player10Team1.position.y = 200;
  
-    player10Team1.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player10Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player10Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));  
 
     moveables.push(player10Team1); 
@@ -191,7 +200,7 @@ if ( i == 10) {
     player11Team1.position.x = 320;
     player11Team1.position.y = 320;
    
-    player11Team1.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player11Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player11Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));  
 
     moveables.push(player11Team1); 
@@ -205,7 +214,7 @@ if ( i == 11) {
     player1Team2.position.x = 980;
     player1Team2.position.y = 90;
    
-    player1Team2.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player1Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player1Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));  
 
     moveables.push(player1Team2); 
@@ -217,7 +226,7 @@ if ( i == 12) {
     player2Team2.position.x = 930;
     player2Team2.position.y = 150;
     
-    player2Team2.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player2Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player2Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));  
 
     moveables.push(player2Team2); 
@@ -229,7 +238,7 @@ if ( i == 13) {
     player3Team2.position.x = 850;
     player3Team2.position.y = 230;
  
-    player3Team2.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player3Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player3Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5])); 
 
     moveables.push(player3Team2); 
@@ -241,7 +250,7 @@ if ( i == 14) {
     player4Team2.position.x = 810;
     player4Team2.position.y = 290;
  
-    player4Team2.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player4Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player4Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5])); 
 
     moveables.push(player4Team2); 
@@ -253,7 +262,7 @@ if ( i == 15) {
     player5Team2.position.x = 770;
     player5Team2.position.y = 350;
     
-    player5Team2.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player5Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player5Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5])); 
 
     moveables.push(player5Team2); 
@@ -265,7 +274,7 @@ if ( i == 16) {
     player6Team2.position.x = 710;
     player6Team2.position.y = 410;
   
-    player6Team2.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player6Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player6Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5])); 
 
     moveables.push(player6Team2); 
@@ -277,7 +286,7 @@ if ( i == 17) {
     player7Team2.position.x = 660;
     player7Team2.position.y = 400;
  
-    player7Team2.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player7Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player7Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
 
     moveables.push(player7Team2);  
@@ -289,7 +298,7 @@ if ( i == 18) {
     player8Team2.position.x = 660;
     player8Team2.position.y = 300;
     
-    player8Team2.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player8Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player8Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5])); 
 
     moveables.push(player8Team2); 
@@ -301,7 +310,7 @@ if ( i == 19) {
     player9Team2.position.x = 660;
     player9Team2.position.y = 90;
     
-    player9Team2.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player9Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player9Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5])); 
 
     moveables.push(player9Team2); 
@@ -313,7 +322,7 @@ if ( i == 20) {
     player10Team2.position.x = 550;
     player10Team2.position.y = 100;
     
-    player10Team2.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player10Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player10Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5])); 
 
     moveables.push(player10Team2); 
@@ -325,7 +334,7 @@ if ( i == 21) {
     player11Team2.position.x = 500;
     player11Team2.position.y = 230;
     
-    player11Team2.velocity = new Vector(getRandomVelocity(Number(player[2]), Number(player[3])), getRandomVelocity(Number(player[2]), Number(player[3])));
+    player11Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
     player11Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5])); 
 
     moveables.push(player11Team2);
@@ -334,7 +343,7 @@ if ( i == 21) {
         }
     }
 
-    function getRandomVelocity(_min: number, _max: number): number {
+function getRandomVelocity(_min: number, _max: number): number {
         let velocity: number = _max - _min;
         
         let random: number = Math.random();
@@ -345,7 +354,7 @@ if ( i == 21) {
         return answer;
         }
 
-    function getRandomPrecision(_min: number, _max: number): number {
+function getRandomPrecision(_min: number, _max: number): number {
             let precision: number = _max - _min;
             
             let random: number = Math.random();
@@ -356,7 +365,7 @@ if ( i == 21) {
             return answer;
             }
 
-    function createLinesman(_nLinesman: number): void {
+function createLinesman(_nLinesman: number): void {
         for (let i: number = 0; i < _nLinesman; i++) {
             let firstLinesman: Linesman = new Linesman();
             firstLinesman.position.x = 900 * Math.random(); // setzt position.x von Linesman
@@ -370,7 +379,7 @@ if ( i == 21) {
         }
     }
 
-    function createReferee(nReferee: number): void {
+function createReferee(nReferee: number): void {
         for (let i: number = 0; i < nReferee; i++) {
             let referee: Referee = new Referee(); 
             moveables.push(referee); 
@@ -383,7 +392,7 @@ if ( i == 21) {
 
    
 
-    function drawSoccerField(): void {
+function drawSoccerField(): void {
 
             //Grasfield
             crc2.beginPath();
@@ -469,7 +478,7 @@ if ( i == 21) {
            }
 
 
-    function update (_soccerField: ImageData): void {
+function update (_soccerField: ImageData): void {
                crc2.putImageData(_soccerField, 0, 0);
                let posBall: Vector = ball.position;
 

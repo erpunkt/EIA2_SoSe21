@@ -1,8 +1,8 @@
 
 namespace Soccer {
     export class Ball extends Moveable { 
-    protected color: string;
-    protected position: Vector;
+        static position: Vector;
+        protected color: string;
     protected velocity: Vector;
     
     constructor(_position?: Vector) {

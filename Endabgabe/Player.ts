@@ -2,16 +2,15 @@
 namespace Soccer {
     export class Player extends Moveable { 
     
+
     
-    public precision: number;
     public colorTeamOne: string;
     public colorTeamTwo: string;
+    public precisionMin: number;
+    public precisionMax: number;
     public radius: number;
-    public position: Vector;
-    public velocity: Vector;
-    public velocity2: number;
-    protected distance: number;
-    protected angle: number;
+    protected position: Vector;
+    protected velocity: Vector;
     protected jerseynumber: number;
     protected team: number;
     protected changeJerseyNumber: boolean;
@@ -32,6 +31,18 @@ namespace Soccer {
     this.velocity = new Vector(a, b);
 }
 
+public move(_timeslice: number): void {
+    this.position.add(this.velocity);
+    
+    //mit Kollision
+    if (this.position.x + 10 > 1000 || this.position.x - 5 < 0) {
+    this.velocity.x = -this.velocity.x;
+    }
+    if (this.position.y + 10 > 600 || this.position.y - 5 < 0) {
+    this.velocity.y = -this.velocity.y;
+    }
+    }
+
 
 public draw(): void { 
     crc2.beginPath();
@@ -46,40 +57,5 @@ public draw(): void {
     crc2.fill();
     crc2.closePath(); 
 } 
-
-
-public moveToBall(_positionBall: Vector): void {
-    let positionBall: Vector = _positionBall;
-    let posX: number = this.position.x - positionBall.x;
-    let posY: number = this.position.y - positionBall.y;
-    if (positionBall.x - this.position.x <= 60 && positionBall.y - this.position.y <= 60) {
-    this.distance = Math.sqrt(posX * posX + posY * posY);
-    
-    let radi: number = Math.atan2(posY, posX);
-    this.angle = radi / Math.PI * 180;
-    
-    this.velocity.x = (posX / this.distance) * this.velocity.x;
-    this.velocity.y = (posY / this.distance) * this.velocity.y;
-
-    let position: Vector = new Vector (posX, posY);
-    position.scale(this.velocity2 / radi);
-
-    this.position.add(position);
-    }
-    }
-
-    public move(_timeslice: number): void {
-        // this.position.add(this.velocity);
-        
-        //mit Kollision
-        if (this.position.x + 10 > 1000 || this.position.x - 5 < 0) {
-        this.velocity.x = -this.velocity.x;
-        }
-        if (this.position.y + 10 > 600 || this.position.y - 5 < 0) {
-        this.velocity.y = -this.velocity.y;
-        }
-        }
-
-
 }
 }

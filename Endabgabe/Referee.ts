@@ -2,7 +2,7 @@
 namespace Soccer {
     export class Referee extends Moveable { 
     protected color: string;
-    // protected position: Vector;
+    protected position: Vector;
     protected velocity: Vector;
     
     constructor(_position?: Vector) {

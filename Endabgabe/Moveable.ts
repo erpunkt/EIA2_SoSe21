@@ -1,9 +1,8 @@
 namespace Soccer {
 
     export abstract class Moveable {
-      public position: Vector;  
-      protected color: string; 
-        
+        protected color: string; 
+        protected position: Vector;
         protected velocity: Vector;
         
         constructor(_position?: Vector) {
@@ -26,10 +25,6 @@ namespace Soccer {
         }
         }
         
-public moveToBall(_positionBall: Vector): void {
-  //
-}
-
         public draw(): void {
       //Test
         }

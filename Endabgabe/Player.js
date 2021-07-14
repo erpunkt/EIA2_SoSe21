@@ -41,18 +41,14 @@ var Soccer;
         }
         moveToBall(_positionBall) {
             let positionBall = _positionBall;
-            let posX = this.position.x - positionBall.x;
-            let posY = this.position.y - positionBall.y;
-            if (positionBall.x - this.position.x <= 60 && positionBall.y - this.position.y <= 60) {
-                this.distance = Math.sqrt(posX * posX + posY * posY);
-                let radi = Math.atan2(posY, posX);
-                this.angle = radi / Math.PI * 180;
-                this.velocity.x = (posX / this.distance) * this.velocity.x;
-                this.velocity.y = (posY / this.distance) * this.velocity.y;
+            let posX = positionBall.x - this.position.x;
+            let posY = positionBall.y - this.position.y;
+            let radi = Math.hypot(posY, posX);
+            if (radi <= 50) {
                 let position = new Soccer.Vector(posX, posY);
                 position.scale(this.velocity2 / radi);
                 this.position.add(position);
-                if (radi <= 5)
+                if (radi <= 12)
                     Soccer.playerAction = Soccer.ActionPl.KICK_BALL;
             }
         }

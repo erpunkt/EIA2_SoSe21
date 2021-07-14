@@ -19,6 +19,7 @@ var Soccer;
                 this.position = new Soccer.Vector(x, y);
             this.velocity = new Soccer.Vector(a, b);
         }
+        //move = moveable
         draw() {
             Soccer.crc2.beginPath();
             Soccer.crc2.arc(this.position.x, this.position.y, 6, 0, 2 * Math.PI);

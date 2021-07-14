@@ -21,7 +21,7 @@ this.position = new Vector(x, y);
     this.velocity = new Vector(a, b);
 }
 
-
+//move = moveable
 
 public draw(): void { 
     crc2.beginPath();

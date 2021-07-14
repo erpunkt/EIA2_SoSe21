@@ -7,6 +7,7 @@ var Soccer;
         ActionPl[ActionPl["GOTO_BALL"] = 0] = "GOTO_BALL";
         ActionPl[ActionPl["KICK_BALL"] = 1] = "KICK_BALL";
         ActionPl[ActionPl["CHANGE_PLAYER"] = 2] = "CHANGE_PLAYER";
+        ActionPl[ActionPl["FlYING_BALL"] = 3] = "FlYING_BALL";
     })(ActionPl = Soccer.ActionPl || (Soccer.ActionPl = {}));
     window.addEventListener("load", handleLoad);
     let moveables = [];
@@ -14,6 +15,7 @@ var Soccer;
     let form;
     let startButton;
     let ball;
+    let timeOut = false; //andere benennung
     Soccer.playerAction = ActionPl.GOTO_BALL;
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
@@ -28,6 +30,7 @@ var Soccer;
         form.addEventListener("change", handleChange);
         startButton = document.querySelector("#startButton");
         startButton.addEventListener("click", createPlayer);
+        canvas.addEventListener("click", getClickPosition);
         window.setInterval(update, 20, soccerField);
     }
     function handleChange(_event) {
@@ -41,6 +44,9 @@ var Soccer;
         }
     }
     function getClickPosition(_event) {
+        let position = new Soccer.Vector(_event.clientX - Soccer.crc2.canvas.offsetLeft, _event.clientY - Soccer.crc2.canvas.offsetTop);
+        ball.target = position;
+        Soccer.playerAction = ActionPl.GOTO_BALL;
     }
     // function createPlayer(nPlayer: number): void {
     //     for (let i: number = 0; i < nPlayer; i++) {
@@ -371,8 +377,19 @@ var Soccer;
                 }
                 break;
             case ActionPl.KICK_BALL:
+                break; //damit sich der Ball nicht mehr bewegt
             case ActionPl.CHANGE_PLAYER:
+            case ActionPl.FlYING_BALL:
+                if (timeOut == false) {
+                    setTimeout(handleTimeOut, 1000 / 2);
+                    timeOut = true;
+                }
+                ball.move(1);
         }
+    }
+    function handleTimeOut() {
+        Soccer.playerAction = ActionPl.GOTO_BALL;
+        timeOut = false;
     }
 })(Soccer || (Soccer = {}));
 //# sourceMappingURL=main.js.map

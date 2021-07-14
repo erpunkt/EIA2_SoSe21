@@ -24,6 +24,8 @@ namespace Soccer {
             this.velocity = new Vector(a, b);
         }
 
+
+        //ball radius
         public move(_timeslice: number): void {
             this.position.add(this.velocity);
             let differenceVector: Vector = Vector.getDifference(this.target, this.position); //weil static

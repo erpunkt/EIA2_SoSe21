@@ -7,7 +7,7 @@ namespace Soccer {
         GOTO_BALL,
         KICK_BALL,
         CHANGE_PLAYER,
-        FlYING_BALL
+        FLYING_BALL
     }
 
 
@@ -73,7 +73,7 @@ namespace Soccer {
     function getClickPosition(_event: MouseEvent): void {
         let position: Vector = new Vector(_event.clientX - crc2.canvas.offsetLeft, _event.clientY - crc2.canvas.offsetTop);
         ball.target = position;
-        playerAction = ActionPl.GOTO_BALL;
+        playerAction = ActionPl.FLYING_BALL;
     }
 
     // function createPlayer(nPlayer: number): void {
@@ -506,7 +506,7 @@ namespace Soccer {
                break; //damit sich der Ball nicht mehr bewegt
 
             case ActionPl.CHANGE_PLAYER:
-                case ActionPl.FlYING_BALL:
+                case ActionPl.FLYING_BALL:
 
                 if (timeOut == false) {
                     setTimeout(handleTimeOut, 1000 / 2);

@@ -55,13 +55,13 @@ public moveToBall(_positionBall: Vector): void {
     let radi: number = Math.hypot(posY, posX);
     
     
-    if ( radi <= 50) {
+    if ( radi <= 60) { //60 Pixel ist der Wahrnehmungsradius übers Spielfeld
     
     let position: Vector = new Vector (posX, posY);
     position.scale(this.velocity2 / radi);
     this.position.add(position);
 
-    if (radi <= 12)
+    if (radi <= 5)
     playerAction = ActionPl.KICK_BALL;
 
     }

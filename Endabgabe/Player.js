@@ -44,11 +44,11 @@ var Soccer;
             let posX = positionBall.x - this.position.x;
             let posY = positionBall.y - this.position.y;
             let radi = Math.hypot(posY, posX);
-            if (radi <= 50) {
+            if (radi <= 60) { //60 Pixel ist der Wahrnehmungsradius übers Spielfeld
                 let position = new Soccer.Vector(posX, posY);
                 position.scale(this.velocity2 / radi);
                 this.position.add(position);
-                if (radi <= 12)
+                if (radi <= 5)
                     Soccer.playerAction = Soccer.ActionPl.KICK_BALL;
             }
         }

@@ -21,6 +21,7 @@ var Soccer;
                 this.position = new Soccer.Vector(x, y);
             this.velocity = new Soccer.Vector(a, b);
         }
+        //ball radius
         move(_timeslice) {
             this.position.add(this.velocity);
             let differenceVector = Soccer.Vector.getDifference(this.target, this.position); //weil static

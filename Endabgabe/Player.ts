@@ -72,8 +72,11 @@ public moveToBall(_positionBall: Vector): void {
 //     if (radi >= 200)
 //    this.position
    
+    playerPosition();
     }
     }
+
+    
 
     public move(_timeslice: number): void {
         // this.position.add(this.velocity);
@@ -89,4 +92,5 @@ public moveToBall(_positionBall: Vector): void {
 
 
 }
+
 }

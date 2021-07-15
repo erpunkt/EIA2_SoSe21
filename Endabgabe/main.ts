@@ -77,14 +77,9 @@ namespace Soccer {
         playerAction = ActionPl.FLYING_BALL;
     }
 
-    // function createPlayer(nPlayer: number): void {
-    //     for (let i: number = 0; i < nPlayer; i++) {
-    //         let player: Player = new Player(); 
-    //         moveables.push(player); 
-    //     }
-    // }
 
     function createPlayer(): void {
+
         let element: HTMLInputElement = <HTMLInputElement>document.getElementById("startButton");
         element.disabled = true;
         for (let i: number = 0; i < 22; i++) {
@@ -102,14 +97,14 @@ namespace Soccer {
             }
             //up left
             if (i == 1) {
-                let player2Team2: Player = new Player();
-                player2Team2.colorTeamOne = player[0];
-                player2Team2.position.x = 100;
-                player2Team2.position.y = 100;
+                let player2Team1: Player = new Player();
+                player2Team1.colorTeamOne = player[0];
+                player2Team1.position.x = 100;
+                player2Team1.position.y = 100;
 
-                player2Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
-                player2Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
-                moveables.push(player2Team2);
+                player2Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
+                player2Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
+                moveables.push(player2Team1);
             }
             //up left middle
             if (i == 2) {
@@ -366,6 +361,106 @@ namespace Soccer {
         }
     }
 
+    export function playerPosition(): void {
+        for (let i: number = 0; i < 22; i++) {
+            if (i == 0) {
+                let player1Team1: Player = new Player;
+                player1Team1.position.x = 50;
+                player1Team1.position.y = 50;
+
+             }
+
+            if (i == 1) {
+                let player2Team1: Player = new Player;
+                player2Team1.position.x = 100;
+                player2Team1.position.y = 100;
+            }
+            // if (i == 2) {
+            //     player3Team1.position.x = 300;
+            //     player3Team1.position.y = 100;
+            // }
+            // if (i == 3) {
+            //     player4Team1.position.x = 500;
+            //     player4Team1.position.y = 100;
+            // }
+            // if (i == 4) {
+            //     player5Team1.position.x = 200;
+            //     player5Team1.position.y = 300;
+            // }
+            // if (i == 5) {
+            //     player6Team1.position.x = 380;
+            //     player6Team1.position.y = 300;
+            // }
+            // if (i == 6) {
+            //     player7Team1.position.x = 100;
+            //     player7Team1.position.y = 500;
+            // }
+            // if (i == 7) {
+            //     player8Team1.position.x = 300;
+            //     player8Team1.position.y = 500;
+            // }
+            // if (i == 8) {
+            //     player9Team1.position.x = 500;
+            //     player9Team1.position.y = 500;
+            // }
+            // if (i == 9) {
+            //     player10Team1.position.x = 650;
+            //     player10Team1.position.y = 400;
+            // }
+            // if (i == 10) {
+            //     player11Team1.position.x = 650;
+            //     player11Team1.position.y = 200;
+            // }
+            // if (i == 11) {
+            //     player1Team2.position.x = 950;
+            //     player1Team2.position.y = 300;
+            // }
+            // if (i == 12) {
+            //     player2Team2.position.x = 900;
+            //     player2Team2.position.y = 100;
+            // }
+            // if (i == 13) {
+            //     player3Team2.position.x = 700;
+            //     player3Team2.position.y = 100;
+            // }
+            // if (i == 14) {
+            //     player4Team2.position.x = 500;
+            //     player4Team2.position.y = 250;
+            // }
+            // if (i == 15) {
+            //     player5Team2.position.x = 500;
+            //     player5Team2.position.y = 400;
+            // }
+            // if (i == 16) {
+            //     player6Team2.position.x = 700;
+            //     player6Team2.position.y = 500;
+            // }
+            // if (i == 17) {
+            //     player7Team2.position.x = 900;
+            //     player7Team2.position.y = 500;
+            // }
+            // if (i == 18) {
+            //     player8Team2.position.x = 660;
+            //     player8Team2.position.y = 300;
+            // }
+            // if (i == 19) {
+            //     player9Team2.position.x = 350;
+            //     player9Team2.position.y = 400;
+            // }
+            // if (i == 20) {
+            //     player10Team2.position.x = 350;
+            //     player10Team2.position.y = 200;
+            // }
+            // if (i == 21) {
+            //     player11Team2.position.x = 800;
+            //     player11Team2.position.y = 300;
+            // }
+        }
+        }
+        
+
+
+
     function getRandomVelocity(_min: number, _max: number): number {
         let velocity: number = _max - _min;
 
@@ -532,7 +627,8 @@ namespace Soccer {
     }
 
     function handleTimeOut(): void {
-        playerAction = ActionPl.GOTO_BALL;
-        timeOut = false;
-    }
+            playerAction = ActionPl.GOTO_BALL;
+            timeOut = false;
+        }   
 }
+

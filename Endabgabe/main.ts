@@ -8,6 +8,7 @@ namespace Soccer {
         KICK_BALL,
         CHANGE_PLAYER,
         FLYING_BALL
+
     }
 
 
@@ -88,68 +89,70 @@ namespace Soccer {
         element.disabled = true;
         for (let i: number = 0; i < 22; i++) {
 
-            //first Player Team one
+            //Goalkeeper left
             if (i == 0) {
                 let player1Team1: Player = new Player();
                 player1Team1.colorTeamOne = player[0];
-                player1Team1.position.x = 90;
-                player1Team1.position.y = 90;
+                player1Team1.position.x = 50;
+                player1Team1.position.y = 300;
 
                 player1Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player1Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player1Team1);
             }
-
+            //up left
             if (i == 1) {
                 let player2Team2: Player = new Player();
                 player2Team2.colorTeamOne = player[0];
-                player2Team2.position.x = 150;
-                player2Team2.position.y = 150;
+                player2Team2.position.x = 100;
+                player2Team2.position.y = 100;
 
                 player2Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player2Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player2Team2);
             }
-
+            //up left middle
             if (i == 2) {
                 let player3Team1: Player = new Player();
                 player3Team1.colorTeamOne = player[0];
-                player3Team1.position.x = 210;
-                player3Team1.position.y = 210;
+                player3Team1.position.x = 300;
+                player3Team1.position.y = 100;
 
                 player3Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player3Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player3Team1);
             }
-
+            //up middleline
             if (i == 3) {
                 let player4Team1: Player = new Player();
                 player4Team1.colorTeamOne = player[0];
-                player4Team1.position.x = 270;
-                player4Team1.position.y = 270;
+                player4Team1.position.x = 500;
+                player4Team1.position.y = 100;
 
                 player4Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player4Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player4Team1);
             }
-
+            
+            //left middle middle
             if (i == 4) {
                 let player5Team1: Player = new Player();
                 player5Team1.colorTeamOne = player[0];
-                player5Team1.position.x = 330;
-                player5Team1.position.y = 330;
+                player5Team1.position.x = 200;
+                player5Team1.position.y = 300;
 
                 player5Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player5Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
 
                 moveables.push(player5Team1);
             }
+            //left middle right
 
             if (i == 5) {
                 let player6Team1: Player = new Player();
                 player6Team1.colorTeamOne = player[0];
-                player6Team1.position.x = 330;
-                player6Team1.position.y = 390;
+                player6Team1.position.x = 380;
+                player6Team1.position.y = 300;
 
                 player6Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player6Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
@@ -157,11 +160,12 @@ namespace Soccer {
                 moveables.push(player6Team1);
             }
 
+            //down left
             if (i == 6) {
                 let player7Team1: Player = new Player();
                 player7Team1.colorTeamOne = player[0];
-                player7Team1.position.x = 270;
-                player7Team1.position.y = 450;
+                player7Team1.position.x = 100;
+                player7Team1.position.y = 500;
 
                 player7Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player7Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
@@ -169,11 +173,12 @@ namespace Soccer {
                 moveables.push(player7Team1);
             }
 
+            //down left middleline
             if (i == 7) {
                 let player8Team1: Player = new Player();
                 player8Team1.colorTeamOne = player[0];
-                player8Team1.position.x = 210;
-                player8Team1.position.y = 510;
+                player8Team1.position.x = 300;
+                player8Team1.position.y = 500;
 
                 player8Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player8Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
@@ -181,11 +186,12 @@ namespace Soccer {
                 moveables.push(player8Team1);
             }
 
+            //down right
             if (i == 8) {
                 let player9Team1: Player = new Player();
                 player9Team1.colorTeamOne = player[0];
-                player9Team1.position.x = 150;
-                player9Team1.position.y = 570;
+                player9Team1.position.x = 500;
+                player9Team1.position.y = 500;
 
                 player9Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player9Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
@@ -193,11 +199,12 @@ namespace Soccer {
                 moveables.push(player9Team1);
             }
 
+            //right between down and middle
             if (i == 9) {
                 let player10Team1: Player = new Player();
                 player10Team1.colorTeamOne = player[0];
-                player10Team1.position.x = 200;
-                player10Team1.position.y = 200;
+                player10Team1.position.x = 650;
+                player10Team1.position.y = 400;
 
                 player10Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player10Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
@@ -205,11 +212,12 @@ namespace Soccer {
                 moveables.push(player10Team1);
             }
 
+            //right  between up and middle
             if (i == 10) {
                 let player11Team1: Player = new Player();
                 player11Team1.colorTeamOne = player[0];
-                player11Team1.position.x = 320;
-                player11Team1.position.y = 320;
+                player11Team1.position.x = 650;
+                player11Team1.position.y = 200;
 
                 player11Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player11Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
@@ -217,49 +225,49 @@ namespace Soccer {
                 moveables.push(player11Team1);
             }
 
-
-
+//Right Team
+            //Goalkeeper right
             if (i == 11) {
                 let player1Team2: Player = new Player();
                 player1Team2.colorTeamTwo = player[1];
-                player1Team2.position.x = 980;
-                player1Team2.position.y = 90;
+                player1Team2.position.x = 950;
+                player1Team2.position.y = 300;
 
                 player1Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player1Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
 
                 moveables.push(player1Team2);
             }
-
+            //up right
             if (i == 12) {
                 let player2Team2: Player = new Player();
                 player2Team2.colorTeamTwo = player[1];
-                player2Team2.position.x = 930;
-                player2Team2.position.y = 150;
+                player2Team2.position.x = 900;
+                player2Team2.position.y = 100;
 
                 player2Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player2Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
 
                 moveables.push(player2Team2);
             }
-
+            //up right middle
             if (i == 13) {
                 let player3Team2: Player = new Player();
                 player3Team2.colorTeamTwo = player[1];
-                player3Team2.position.x = 850;
-                player3Team2.position.y = 230;
+                player3Team2.position.x = 700;
+                player3Team2.position.y = 100;
 
                 player3Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player3Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
 
                 moveables.push(player3Team2);
             }
-
+            //up right middleline
             if (i == 14) {
                 let player4Team2: Player = new Player();
                 player4Team2.colorTeamTwo = player[1];
-                player4Team2.position.x = 810;
-                player4Team2.position.y = 290;
+                player4Team2.position.x = 500;
+                player4Team2.position.y = 250;
 
                 player4Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player4Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
@@ -267,41 +275,43 @@ namespace Soccer {
                 moveables.push(player4Team2);
             }
 
+            //down right middle
             if (i == 15) {
                 let player5Team2: Player = new Player();
                 player5Team2.colorTeamTwo = player[1];
-                player5Team2.position.x = 770;
-                player5Team2.position.y = 350;
+                player5Team2.position.x = 500;
+                player5Team2.position.y = 400;
 
                 player5Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player5Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
 
                 moveables.push(player5Team2);
             }
-
+            //down right middleline
             if (i == 16) {
                 let player6Team2: Player = new Player();
                 player6Team2.colorTeamTwo = player[1];
-                player6Team2.position.x = 710;
-                player6Team2.position.y = 410;
+                player6Team2.position.x = 700;
+                player6Team2.position.y = 500;
 
                 player6Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player6Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
 
                 moveables.push(player6Team2);
             }
-
+//down right 
             if (i == 17) {
                 let player7Team2: Player = new Player();
                 player7Team2.colorTeamTwo = player[1];
-                player7Team2.position.x = 660;
-                player7Team2.position.y = 400;
+                player7Team2.position.x = 900;
+                player7Team2.position.y = 500;
 
                 player7Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player7Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
 
                 moveables.push(player7Team2);
             }
+            //right middle left
 
             if (i == 18) {
                 let player8Team2: Player = new Player();
@@ -314,12 +324,12 @@ namespace Soccer {
 
                 moveables.push(player8Team2);
             }
-
+//left between down and middle
             if (i == 19) {
                 let player9Team2: Player = new Player();
                 player9Team2.colorTeamTwo = player[1];
-                player9Team2.position.x = 660;
-                player9Team2.position.y = 90;
+                player9Team2.position.x = 350;
+                player9Team2.position.y = 400;
 
                 player9Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player9Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
@@ -327,23 +337,25 @@ namespace Soccer {
                 moveables.push(player9Team2);
             }
 
+            //right between up and middle
+
             if (i == 20) {
                 let player10Team2: Player = new Player();
                 player10Team2.colorTeamTwo = player[1];
-                player10Team2.position.x = 550;
-                player10Team2.position.y = 100;
+                player10Team2.position.x = 350;
+                player10Team2.position.y = 200;
 
                 player10Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player10Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
 
                 moveables.push(player10Team2);
             }
-
+            //right middle middle
             if (i == 21) {
                 let player11Team2: Player = new Player();
                 player11Team2.colorTeamOne = player[1];
-                player11Team2.position.x = 500;
-                player11Team2.position.y = 230;
+                player11Team2.position.x = 800;
+                player11Team2.position.y = 300;
 
                 player11Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player11Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));

@@ -38,21 +38,30 @@ namespace Soccer {
             }
                 
 
-            //Kollision
-            if (this.position.x + 10 > 1000 || this.position.x - 5 < 0) {
-                this.velocity.x = -this.velocity.x;
-            }
-            if (this.position.y + 10 > 600 || this.position.y - 5 < 0) {
-                this.velocity.y = -this.velocity.y;
-            }
+            // //Kollision, sorgt dafür das der Ball im Spielfeld bleibt
+            // if (this.position.x + 10 > 1000 || this.position.x - 5 < 0) {
+            //     this.velocity.x = -this.velocity.x;
+            // }
+            // if (this.position.y + 10 > 600 || this.position.y - 5 < 0) {
+            //     this.velocity.y = -this.velocity.y;
+            // }
         }
 
         public draw(): void {
+            //Ball
             crc2.beginPath();
-            crc2.arc(this.position.x, this.position.y, 6, 0, 2 * Math.PI);
+            crc2.arc(this.position.x, this.position.y, 7, 0, 2 * Math.PI);
             crc2.fillStyle = this.color;
             crc2.fill();
             crc2.closePath();
+
+            // //Linien auf dem Ball
+            // crc2.beginPath();
+            // crc2.lineTo(this.position.x , this.position.y );
+            // crc2.moveTo(this.position.x + 7, this.position.y + 7 );
+            // crc2.moveTo
+            // crc2.fillStyle = "black";
+            // crc2.closePath();
         }
     }
 }

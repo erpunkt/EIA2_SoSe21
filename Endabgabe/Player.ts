@@ -32,19 +32,24 @@ namespace Soccer {
     this.velocity = new Vector(a, b);
 }
 
-
+//Größe der Spieler
 public draw(): void { 
     crc2.beginPath();
-    crc2.arc(this.position.x, this.position.y, 6, 0, 2 * Math.PI);
+    crc2.arc(this.position.x, this.position.y, 10, 0, 2 * Math.PI);
     crc2.fillStyle = this.colorTeamOne;
     crc2.fill();
     crc2.closePath(); 
 
     crc2.beginPath();
-    crc2.arc(this.position.x, this.position.y, 6, 0, 2 * Math.PI);
+    crc2.arc(this.position.x, this.position.y, 10, 0, 2 * Math.PI);
     crc2.fillStyle = this.colorTeamTwo;
     crc2.fill();
-    crc2.closePath(); 
+    crc2.closePath();
+    
+    // crc2.beginPath();
+    // crc2.arc(this.position.x, this.position.y, 100, 0, 2 * Math.PI);
+    // crc2.stroke();
+    // crc2.closePath();
 } 
 
 
@@ -55,15 +60,18 @@ public moveToBall(_positionBall: Vector): void {
     let radi: number = Math.hypot(posY, posX);
     
     
-    if ( radi <= 60) { //60 Pixel ist der Wahrnehmungsradius übers Spielfeld
+    if ( radi <= 200) { //60 Pixel ist der Wahrnehmungsradius übers Spielfeld
     
     let position: Vector = new Vector (posX, posY);
     position.scale(this.velocity2 / radi);
     this.position.add(position);
 
-    if (radi <= 5)
+    if (radi <= 30)
     playerAction = ActionPl.KICK_BALL;
 
+//     if (radi >= 200)
+//    this.position
+   
     }
     }
 

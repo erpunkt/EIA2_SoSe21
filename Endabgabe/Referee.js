@@ -22,7 +22,7 @@ var Soccer;
         //move = moveable
         draw() {
             Soccer.crc2.beginPath();
-            Soccer.crc2.arc(this.position.x, this.position.y, 6, 0, 2 * Math.PI);
+            Soccer.crc2.arc(this.position.x, this.position.y, 8, 0, 2 * Math.PI);
             Soccer.crc2.fillStyle = this.color;
             Soccer.crc2.fill();
             Soccer.crc2.closePath();

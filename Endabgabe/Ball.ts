@@ -1,7 +1,6 @@
 
 namespace Soccer {
     export class Ball extends Moveable {
-        static position: Vector;
         public target: Vector;
         protected color: string;
         protected velocity: Vector;
@@ -24,7 +23,6 @@ namespace Soccer {
             this.velocity = new Vector(a, b);
         }
 
-
         //ball radius
         public move(_timeslice: number): void {
             this.position.add(this.velocity);
@@ -36,15 +34,15 @@ namespace Soccer {
                 this.velocity.x = 0;
                 this.velocity.y = 0;
             }
-                
 
-            // //Kollision, sorgt dafür das der Ball im Spielfeld bleibt
-            // if (this.position.x + 10 > 1000 || this.position.x - 5 < 0) {
-            //     this.velocity.x = -this.velocity.x;
-            // }
-            // if (this.position.y + 10 > 600 || this.position.y - 5 < 0) {
-            //     this.velocity.y = -this.velocity.y;
-            // }
+
+            //Kollision, sorgt dafür das der Ball im Spielfeld bleibt
+            if (this.position.x + 10 > 1000 || this.position.x - 5 < 0) {
+                this.velocity.x = -this.velocity.x;
+            }
+            if (this.position.y + 10 > 600 || this.position.y - 5 < 0) {
+                this.velocity.y = -this.velocity.y;
+            }
         }
 
         public draw(): void {

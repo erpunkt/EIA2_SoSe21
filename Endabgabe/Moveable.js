@@ -3,12 +3,14 @@ var Soccer;
 (function (Soccer) {
     class Moveable {
         position;
+        startPosition;
         color;
         velocity;
-        constructor(_position) {
+        constructor(_position, _startPosition) {
             let x = 1000 * Math.random();
             let y = 600 * Math.random();
             this.position = new Soccer.Vector(x, y);
+            this.startPosition = new Soccer.Vector(x, y);
         }
         move(_timeslice) {
             this.position.add(this.velocity);

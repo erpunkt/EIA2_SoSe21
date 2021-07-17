@@ -3,8 +3,8 @@ var Soccer;
 (function (Soccer) {
     class Linesman extends Soccer.Moveable {
         color;
-        position;
         velocity;
+        position;
         constructor(_position) {
             super(_position);
             let x = 1000 * Math.random();

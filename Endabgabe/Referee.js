@@ -2,11 +2,11 @@
 var Soccer;
 (function (Soccer) {
     class Referee extends Soccer.Moveable {
+        position;
         color;
-        // protected position: Vector;
         velocity;
         constructor(_position) {
-            super(_position);
+            super(_position); //Übernimmt aus der Superklasse
             let x = 1000 * Math.random();
             let y = 600 * Math.random();
             let a = -Math.random();
@@ -19,7 +19,6 @@ var Soccer;
                 this.position = new Soccer.Vector(x, y);
             this.velocity = new Soccer.Vector(a, b);
         }
-        //move = moveable
         draw() {
             Soccer.crc2.beginPath();
             Soccer.crc2.arc(this.position.x, this.position.y, 8, 0, 2 * Math.PI);

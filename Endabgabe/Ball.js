@@ -2,7 +2,6 @@
 var Soccer;
 (function (Soccer) {
     class Ball extends Soccer.Moveable {
-        static position;
         target;
         color;
         velocity;
@@ -31,13 +30,13 @@ var Soccer;
                 this.velocity.x = 0;
                 this.velocity.y = 0;
             }
-            // //Kollision, sorgt dafür das der Ball im Spielfeld bleibt
-            // if (this.position.x + 10 > 1000 || this.position.x - 5 < 0) {
-            //     this.velocity.x = -this.velocity.x;
-            // }
-            // if (this.position.y + 10 > 600 || this.position.y - 5 < 0) {
-            //     this.velocity.y = -this.velocity.y;
-            // }
+            //Kollision, sorgt dafür das der Ball im Spielfeld bleibt
+            if (this.position.x + 10 > 1000 || this.position.x - 5 < 0) {
+                this.velocity.x = -this.velocity.x;
+            }
+            if (this.position.y + 10 > 600 || this.position.y - 5 < 0) {
+                this.velocity.y = -this.velocity.y;
+            }
         }
         draw() {
             //Ball

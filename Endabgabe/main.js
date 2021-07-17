@@ -5,7 +5,7 @@ var Soccer;
     let ActionPl;
     (function (ActionPl) {
         ActionPl[ActionPl["GOTO_BALL"] = 0] = "GOTO_BALL";
-        ActionPl[ActionPl["KICK_BALL"] = 1] = "KICK_BALL";
+        ActionPl[ActionPl["STOP_GAME"] = 1] = "STOP_GAME";
         ActionPl[ActionPl["CHANGE_PLAYER"] = 2] = "CHANGE_PLAYER";
         ActionPl[ActionPl["FLYING_BALL"] = 3] = "FLYING_BALL";
     })(ActionPl = Soccer.ActionPl || (Soccer.ActionPl = {}));
@@ -31,16 +31,20 @@ var Soccer;
         startButton = document.querySelector("#startButton");
         startButton.addEventListener("click", createPlayer);
         canvas.addEventListener("click", getClickPosition);
+        canvas.addEventListener("keydown", playSound);
         window.setInterval(update, 20, soccerField);
+    }
+    function playSound(_event) {
+        console.log("key down");
+        let audio = new Audio();
+        audio.play();
     }
     function handleChange(_event) {
         _event.preventDefault();
         let formData = new FormData(document.forms[0]);
         player = [];
-        // console.log(FormData);
         for (let entry of formData) {
             player.push(String(entry[1]));
-            // console.log(FormData yerseycolor.value);
         }
     }
     function getClickPosition(_event) {
@@ -48,12 +52,6 @@ var Soccer;
         ball.target = position;
         Soccer.playerAction = ActionPl.FLYING_BALL;
     }
-    // function createPlayer(nPlayer: number): void {
-    //     for (let i: number = 0; i < nPlayer; i++) {
-    //         let player: Player = new Player(); 
-    //         moveables.push(player); 
-    //     }
-    // }
     function createPlayer() {
         let element = document.getElementById("startButton");
         element.disabled = true;
@@ -62,28 +60,37 @@ var Soccer;
             if (i == 0) {
                 let player1Team1 = new Soccer.Player();
                 player1Team1.colorTeamOne = player[0];
+                player1Team1.jerseynumber = "1";
                 player1Team1.position.x = 50;
                 player1Team1.position.y = 300;
+                player1Team1.startPosition.x = 50;
+                player1Team1.startPosition.y = 300;
                 player1Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player1Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player1Team1);
             }
             //up left
             if (i == 1) {
-                let player2Team2 = new Soccer.Player();
-                player2Team2.colorTeamOne = player[0];
-                player2Team2.position.x = 100;
-                player2Team2.position.y = 100;
-                player2Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
-                player2Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
-                moveables.push(player2Team2);
+                let player2Team1 = new Soccer.Player();
+                player2Team1.colorTeamOne = player[0];
+                player2Team1.jerseynumber = "2";
+                player2Team1.position.x = 100;
+                player2Team1.position.y = 100;
+                player2Team1.startPosition.x = 100;
+                player2Team1.startPosition.y = 100;
+                player2Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
+                player2Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
+                moveables.push(player2Team1);
             }
             //up left middle
             if (i == 2) {
                 let player3Team1 = new Soccer.Player();
                 player3Team1.colorTeamOne = player[0];
+                player3Team1.jerseynumber = "3";
                 player3Team1.position.x = 300;
                 player3Team1.position.y = 100;
+                player3Team1.startPosition.x = 300;
+                player3Team1.startPosition.y = 100;
                 player3Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player3Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player3Team1);
@@ -92,8 +99,11 @@ var Soccer;
             if (i == 3) {
                 let player4Team1 = new Soccer.Player();
                 player4Team1.colorTeamOne = player[0];
+                player4Team1.jerseynumber = "4";
                 player4Team1.position.x = 500;
                 player4Team1.position.y = 100;
+                player4Team1.startPosition.x = 500;
+                player4Team1.startPosition.y = 100;
                 player4Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player4Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player4Team1);
@@ -102,8 +112,11 @@ var Soccer;
             if (i == 4) {
                 let player5Team1 = new Soccer.Player();
                 player5Team1.colorTeamOne = player[0];
+                player5Team1.jerseynumber = "5";
                 player5Team1.position.x = 200;
                 player5Team1.position.y = 300;
+                player5Team1.startPosition.x = 200;
+                player5Team1.startPosition.y = 300;
                 player5Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player5Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player5Team1);
@@ -112,8 +125,11 @@ var Soccer;
             if (i == 5) {
                 let player6Team1 = new Soccer.Player();
                 player6Team1.colorTeamOne = player[0];
+                player6Team1.jerseynumber = "6";
                 player6Team1.position.x = 380;
                 player6Team1.position.y = 300;
+                player6Team1.startPosition.x = 380;
+                player6Team1.startPosition.y = 300;
                 player6Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player6Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player6Team1);
@@ -122,8 +138,11 @@ var Soccer;
             if (i == 6) {
                 let player7Team1 = new Soccer.Player();
                 player7Team1.colorTeamOne = player[0];
+                player7Team1.jerseynumber = "7";
                 player7Team1.position.x = 100;
                 player7Team1.position.y = 500;
+                player7Team1.startPosition.x = 100;
+                player7Team1.startPosition.y = 500;
                 player7Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player7Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player7Team1);
@@ -132,8 +151,11 @@ var Soccer;
             if (i == 7) {
                 let player8Team1 = new Soccer.Player();
                 player8Team1.colorTeamOne = player[0];
+                player8Team1.jerseynumber = "8";
                 player8Team1.position.x = 300;
                 player8Team1.position.y = 500;
+                player8Team1.startPosition.x = 300;
+                player8Team1.startPosition.y = 500;
                 player8Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player8Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player8Team1);
@@ -142,8 +164,11 @@ var Soccer;
             if (i == 8) {
                 let player9Team1 = new Soccer.Player();
                 player9Team1.colorTeamOne = player[0];
+                player9Team1.jerseynumber = "9";
                 player9Team1.position.x = 500;
                 player9Team1.position.y = 500;
+                player9Team1.startPosition.x = 500;
+                player9Team1.startPosition.y = 500;
                 player9Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player9Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player9Team1);
@@ -152,8 +177,11 @@ var Soccer;
             if (i == 9) {
                 let player10Team1 = new Soccer.Player();
                 player10Team1.colorTeamOne = player[0];
+                player10Team1.jerseynumber = "10";
                 player10Team1.position.x = 650;
                 player10Team1.position.y = 400;
+                player10Team1.startPosition.x = 650;
+                player10Team1.startPosition.y = 400;
                 player10Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player10Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player10Team1);
@@ -162,8 +190,11 @@ var Soccer;
             if (i == 10) {
                 let player11Team1 = new Soccer.Player();
                 player11Team1.colorTeamOne = player[0];
+                player11Team1.jerseynumber = "11";
                 player11Team1.position.x = 650;
                 player11Team1.position.y = 200;
+                player11Team1.startPosition.x = 650;
+                player11Team1.startPosition.y = 200;
                 player11Team1.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player11Team1.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player11Team1);
@@ -173,8 +204,11 @@ var Soccer;
             if (i == 11) {
                 let player1Team2 = new Soccer.Player();
                 player1Team2.colorTeamTwo = player[1];
+                player1Team2.jerseynumber = "1";
                 player1Team2.position.x = 950;
                 player1Team2.position.y = 300;
+                player1Team2.startPosition.x = 950;
+                player1Team2.startPosition.y = 300;
                 player1Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player1Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player1Team2);
@@ -183,8 +217,11 @@ var Soccer;
             if (i == 12) {
                 let player2Team2 = new Soccer.Player();
                 player2Team2.colorTeamTwo = player[1];
+                player2Team2.jerseynumber = "2";
                 player2Team2.position.x = 900;
                 player2Team2.position.y = 100;
+                player2Team2.startPosition.x = 900;
+                player2Team2.startPosition.y = 100;
                 player2Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player2Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player2Team2);
@@ -193,8 +230,11 @@ var Soccer;
             if (i == 13) {
                 let player3Team2 = new Soccer.Player();
                 player3Team2.colorTeamTwo = player[1];
+                player3Team2.jerseynumber = "3";
                 player3Team2.position.x = 700;
                 player3Team2.position.y = 100;
+                player3Team2.startPosition.x = 700;
+                player3Team2.startPosition.y = 100;
                 player3Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player3Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player3Team2);
@@ -203,8 +243,11 @@ var Soccer;
             if (i == 14) {
                 let player4Team2 = new Soccer.Player();
                 player4Team2.colorTeamTwo = player[1];
+                player4Team2.jerseynumber = "4";
                 player4Team2.position.x = 500;
-                player4Team2.position.y = 250;
+                player4Team2.position.y = 200;
+                player4Team2.startPosition.x = 500;
+                player4Team2.startPosition.y = 200;
                 player4Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player4Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player4Team2);
@@ -213,8 +256,11 @@ var Soccer;
             if (i == 15) {
                 let player5Team2 = new Soccer.Player();
                 player5Team2.colorTeamTwo = player[1];
+                player5Team2.jerseynumber = "5";
                 player5Team2.position.x = 500;
                 player5Team2.position.y = 400;
+                player5Team2.startPosition.x = 500;
+                player5Team2.startPosition.y = 400;
                 player5Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player5Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player5Team2);
@@ -223,8 +269,11 @@ var Soccer;
             if (i == 16) {
                 let player6Team2 = new Soccer.Player();
                 player6Team2.colorTeamTwo = player[1];
+                player6Team2.jerseynumber = "6";
                 player6Team2.position.x = 700;
                 player6Team2.position.y = 500;
+                player6Team2.startPosition.x = 700;
+                player6Team2.startPosition.y = 500;
                 player6Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player6Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player6Team2);
@@ -233,8 +282,11 @@ var Soccer;
             if (i == 17) {
                 let player7Team2 = new Soccer.Player();
                 player7Team2.colorTeamTwo = player[1];
+                player7Team2.jerseynumber = "7";
                 player7Team2.position.x = 900;
                 player7Team2.position.y = 500;
+                player7Team2.startPosition.x = 900;
+                player7Team2.startPosition.y = 500;
                 player7Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player7Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player7Team2);
@@ -243,8 +295,11 @@ var Soccer;
             if (i == 18) {
                 let player8Team2 = new Soccer.Player();
                 player8Team2.colorTeamTwo = player[1];
+                player8Team2.jerseynumber = "8";
                 player8Team2.position.x = 660;
                 player8Team2.position.y = 300;
+                player8Team2.startPosition.x = 660;
+                player8Team2.startPosition.y = 300;
                 player8Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player8Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player8Team2);
@@ -253,8 +308,11 @@ var Soccer;
             if (i == 19) {
                 let player9Team2 = new Soccer.Player();
                 player9Team2.colorTeamTwo = player[1];
+                player9Team2.jerseynumber = "9";
                 player9Team2.position.x = 350;
                 player9Team2.position.y = 400;
+                player9Team2.startPosition.x = 350;
+                player9Team2.startPosition.y = 400;
                 player9Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player9Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player9Team2);
@@ -263,8 +321,11 @@ var Soccer;
             if (i == 20) {
                 let player10Team2 = new Soccer.Player();
                 player10Team2.colorTeamTwo = player[1];
+                player10Team2.jerseynumber = "10";
                 player10Team2.position.x = 350;
                 player10Team2.position.y = 200;
+                player10Team2.startPosition.x = 350;
+                player10Team2.startPosition.y = 200;
                 player10Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player10Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player10Team2);
@@ -273,8 +334,11 @@ var Soccer;
             if (i == 21) {
                 let player11Team2 = new Soccer.Player();
                 player11Team2.colorTeamOne = player[1];
+                player11Team2.jerseynumber = "11";
                 player11Team2.position.x = 800;
                 player11Team2.position.y = 300;
+                player11Team2.startPosition.x = 800;
+                player11Team2.startPosition.y = 300;
                 player11Team2.velocity2 = getRandomVelocity(Number(player[2]), Number(player[3]));
                 player11Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
                 moveables.push(player11Team2);
@@ -393,17 +457,16 @@ var Soccer;
         switch (Soccer.playerAction) {
             case ActionPl.GOTO_BALL:
                 for (let moveable of moveables) {
-                    moveable.draw();
-                    moveable.move(1);
+                    moveable.move(1 / 15);
                     moveable.moveToBall(posBall);
                 }
                 break;
-            case ActionPl.KICK_BALL:
+            case ActionPl.STOP_GAME:
                 break; //damit sich der Ball nicht mehr bewegt
             case ActionPl.CHANGE_PLAYER:
             case ActionPl.FLYING_BALL:
                 if (timeOut == false) {
-                    setTimeout(handleTimeOut, 1000 / 2);
+                    setTimeout(handleTimeOut, 1000 / 2); //For the Referee
                     timeOut = true;
                 }
                 ball.move(1);

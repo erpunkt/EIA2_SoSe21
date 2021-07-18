@@ -9,6 +9,7 @@ var Soccer;
         position;
         changeJerseyNumber;
         jerseynumber;
+        playerOnBall;
         velocity; //Geschwindigkeit Ball
         velocity2; //Geschwindigkeit Spieler
         distance;
@@ -62,7 +63,9 @@ var Soccer;
                 let position = new Soccer.Vector(posX, posY);
                 position.scale(this.velocity2 / radi);
                 this.position.add(position);
-                if (radi <= 30) {
+                if (radi <= 7) {
+                    this.playerOnBall = document.querySelector("#onBall");
+                    this.playerOnBall.innerHTML = this.jerseynumber;
                     Soccer.playerAction = Soccer.ActionPl.STOP_GAME;
                 }
             }
@@ -74,16 +77,6 @@ var Soccer;
             //     position.scale(this.velocity2 / radi);
             //     this.position.add(position);
             // }
-        }
-        move(_timeslice) {
-            // this.position.add(this.velocity);
-            //mit Kollision
-            if (this.position.x + 10 > 1000 || this.position.x - 5 < 0) {
-                this.velocity.x = -this.velocity.x;
-            }
-            if (this.position.y + 10 > 600 || this.position.y - 5 < 0) {
-                this.velocity.y = -this.velocity.y;
-            }
         }
     }
     Soccer.Player = Player;

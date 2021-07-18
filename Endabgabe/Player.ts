@@ -10,6 +10,7 @@ namespace Soccer {
         public position: Vector;
         public changeJerseyNumber: boolean;
         public jerseynumber: string;
+        public playerOnBall: HTMLElement;
         public velocity: Vector; //Geschwindigkeit Ball
         public velocity2: number; //Geschwindigkeit Spieler
         protected distance: number;
@@ -58,7 +59,7 @@ namespace Soccer {
             crc2.strokeStyle = "white";
             crc2.closePath();
 
-            
+
 
             // crc2.beginPath();
             // crc2.arc(this.position.x, this.position.y, 100, 0, 2 * Math.PI);
@@ -76,38 +77,40 @@ namespace Soccer {
 
             if (radi <= 200) { //200 Pixel ist der Wahrnehmungsradius übers Spielfeld
 
-                let position: Vector = new Vector(posX, posY);
+        let position: Vector = new Vector(posX, posY);
 
-                position.scale(this.velocity2 / radi);
-                this.position.add(position);
+        position.scale(this.velocity2 / radi);
+        this.position.add(position);
 
-                if (radi <= 30) {
-                    playerAction = ActionPl.STOP_GAME;
-                }
-            }
+        if (radi <= 7) {
+            this.playerOnBall = <HTMLElement>document.querySelector("#onBall");
+            this.playerOnBall.innerHTML = this.jerseynumber;
+            playerAction = ActionPl.STOP_GAME;
+        }
+    }
 
             if (radi > 200) {
 
-                this.position.set(xdefaultPos, ydefaultPos);
-            }
-            // } else {
-            //     let position: Vector = new Vector (xdefaultPos, ydefaultPos);
-            //     position.scale(this.velocity2 / radi);
-            //     this.position.add(position);
-            // }
-        }
+        this.position.set(xdefaultPos, ydefaultPos);
+    }
+    // } else {
+    //     let position: Vector = new Vector (xdefaultPos, ydefaultPos);
+    //     position.scale(this.velocity2 / radi);
+    //     this.position.add(position);
+    // }
+}
 
-        public move(_timeslice: number): void {
-            // this.position.add(this.velocity);
+        // public move(_timeslice: number): void {
+        //     // this.position.add(this.velocity);
 
-            //mit Kollision
-            if (this.position.x + 10 > 1000 || this.position.x - 5 < 0) {
-                this.velocity.x = -this.velocity.x;
-            }
-            if (this.position.y + 10 > 600 || this.position.y - 5 < 0) {
-                this.velocity.y = -this.velocity.y;
-            }
-        }
+        //     //mit Kollision
+        //     if (this.position.x + 10 > 1000 || this.position.x - 5 < 0) {
+        //         this.velocity.x = -this.velocity.x;
+        //     }
+        //     if (this.position.y + 10 > 600 || this.position.y - 5 < 0) {
+        //         this.velocity.y = -this.velocity.y;
+        //     }
+        // }
 
 
     }

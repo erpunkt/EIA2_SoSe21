@@ -18,6 +18,7 @@ namespace Soccer {
 
     let form: HTMLElement;
     let startButton: HTMLElement;
+    let playerStats: HTMLElement;
 
     let ball: Ball;
 
@@ -45,14 +46,19 @@ namespace Soccer {
         form = <HTMLElement>document.querySelector("form");
         form.addEventListener("change", handleChange);
 
+
+
         startButton = <HTMLElement>document.querySelector("#startButton");
         startButton.addEventListener("click", createPlayer);
+
+        // playerStats = <HTMLElement>document.getElementById("playerStats");
+        // playerStats?.addEventListener("change", displayPlayerStats);
 
         canvas.addEventListener("click", getClickPosition);
 
         canvas.addEventListener("keydown", playSound);
 
-        
+
         window.setInterval(update, 20, soccerField);
 
     }
@@ -84,7 +90,7 @@ namespace Soccer {
     function createPlayer(): void {
 
         let element: HTMLInputElement = <HTMLInputElement>document.getElementById("startButton");
-        element.disabled = true;
+        element.disabled = true; // Das HTMLInputElement
         for (let i: number = 0; i < 22; i++) {
 
             //Goalkeeper left
@@ -420,7 +426,90 @@ namespace Soccer {
             }
 
         }
+
+        let form: HTMLFormElement = document.createElement("form");
+        document.body.appendChild(form);
+
+        let fieldset: HTMLFieldSetElement = document.createElement("fieldset");
+        form.appendChild(fieldset);
+
+        let legend: HTMLElement = document.createElement("legend");
+        legend.innerHTML = "Player Stats - Team 1";
+        fieldset.appendChild(legend);
+
+        let select1: HTMLSelectElement = document.createElement("select");
+        select1.setAttribute("id", "select1");
+        select1.addEventListener("change", displayPlayerStats);
+        fieldset.appendChild(select1);
+
+        for (let i: number = 1; i < 12; i++) {
+            let option: HTMLOptionElement = document.createElement("option");
+            option.text = "Player" + i;
+            select1.add(option);
+
+        }
+
+        let form2: HTMLFormElement = document.createElement("form");
+        form2.classList.add("style");
+        document.body.appendChild(form2);
+
+        let fieldset2: HTMLFieldSetElement = document.createElement("fieldset");
+        form.appendChild(fieldset2);
+
+        let legend2: HTMLElement = document.createElement("legend");
+        legend2.innerHTML = "Player Stats - Team 2";
+        fieldset2.appendChild(legend2);
+
+        let select2: HTMLSelectElement = document.createElement("select");
+        select2.addEventListener("change", displayPlayerStats);
+        select1.setAttribute("id", "select1");
+        fieldset2.appendChild(select2);
+
+        for (let i: number = 1; i < 12; i++) {
+            let option: HTMLOptionElement = document.createElement("option");
+            option.text = "Player" + i;
+            select2.add(option);
+        }
+
+        let formDiv: HTMLDivElement = document.createElement("div");
+        formDiv.style.float = "right";
+        formDiv.style.borderColor = "black";
+        formDiv.style.borderStyle = "groove";
+        formDiv.style.borderRadius = "2%";
+        formDiv.style.marginRight = "2%";
+        formDiv.style.position = "absolut";
+        document.body.appendChild(formDiv);
+        formDiv.appendChild(form);
+
     }
+
+    function displayPlayerStats(): void {
+        let div: HTMLElement = document.createElement("div");
+        div.innerHTML = "PLAYER STATS";
+        document.body.appendChild(div);
+
+        // let div: HTMLSelectElement = document.querySelector("div");
+        // for (let i: number = 0; i > div.options.length; i++) {
+        // if (div.options[i].text == "Player 1") { //wenn die option ausgewählt wurde wird
+        // playerStats.innerHTML = "I AM PLAYER1"; // das angezeigt
+        // }
+        // }
+
+        let select: HTMLSelectElement = <HTMLSelectElement> document.querySelector("#select1");
+        for (let i: number = 0; i > select.options.length; i++) {
+            if (select.options[i].text == "Player1Team1") {
+                playerStats.innerHTML = "I AM PLAYER 1";
+                div.appendChild(playerStats);
+            }
+            if (select.options[i].text == "Player1Team1")   {
+                playerStats.innerHTML = "I AM PLAYER";
+            }
+
+
+           }
+
+        
+        }
 
     function getRandomVelocity(_min: number, _max: number): number {
         let velocity: number = _max - _min;
@@ -563,8 +652,9 @@ namespace Soccer {
 
 
                 for (let moveable of moveables) {
-                    moveable.move(1 / 15);
-                    moveable.moveToBall(posBall);
+                    moveable.move(1);
+                    moveable.moveToBall(posBall); //den Ball brauchen nur die Spieler
+            
                 }
 
 

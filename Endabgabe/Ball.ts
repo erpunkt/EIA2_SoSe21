@@ -1,9 +1,15 @@
 
 namespace Soccer {
     export class Ball extends Moveable {
-        public target: Vector;
+        public goalLeft: HTMLElement;
+        public goalRight: HTMLElement;
+        public goal1: number = 0;
+        public goal2: number = 0;
+        public target: Vector; 
         protected color: string;
         protected velocity: Vector;
+        
+
 
         constructor(_position?: Vector) {
             super(_position);
@@ -24,17 +30,47 @@ namespace Soccer {
         }
 
         //ball radius
-        public move(_timeslice: number): void {
+        public move(_timeslice: number, _precision?: number): void {
+
             this.position.add(this.velocity);
             let differenceVector: Vector = Vector.getDifference(this.target, this.position); //weil static
             this.velocity = new Vector(differenceVector.x / 10, differenceVector.y / 10); //der Vector zwischen ziel und punkt des balles ist der difference Vector. Die Geschiwndigkeit ist die x Richtung dadurch wird die strecke geteilt. Geschwidnigkeit wird dann in Richtung der Click Position gesetzt. Hier 1/10
             this.position.add(this.velocity);
 
+            //gate first Team, left
+            let diffX1: number = 0 - this.position.x; //Differenz berechnen von Ball posx und player posx
+            let diffY1: number = 300 - this.position.y; //Differenz berechnen von Ball posy und player posy
+            let radiL: number = Math.hypot(diffY1, diffX1); //radius links
+
+            //gate secondTeam, right
+            let diffX2: number = 1000 - this.position.x; //Differenz berechnen von Ball posx und player posx
+            let diffY2: number = 300 - this.position.y; //Differenz berechnen von Ball posy und player posy
+            let radiR: number = Math.hypot(diffY2, diffX2); //radius rechts
+
+            
             if (differenceVector.length <= 10) { //wenn der Ball nah genug an der Click Position ist soll er sich nicht mehr bewegen
                 this.velocity.x = 0;
                 this.velocity.y = 0;
             }
 
+
+            if (radiL <= 45) { //wenn Radius kleiner gleich 100
+                this.goalLeft = <HTMLElement>document.querySelector("#goalTeam1");
+                this.goal1++;
+                this.goalLeft.innerHTML = this.goal1 + "";
+                playerAction = ActionPl.STOP_GAME;
+                this.position.set(this.startPosition.x, this.startPosition.y);
+                this.target.set(this.startPosition.x, this.startPosition.y);
+            }
+
+            if (radiR <= 45) {
+                this.goalRight = <HTMLElement>document.querySelector("#goalTeam2");
+                this.goal2++;
+                this.goalRight.innerHTML = this.goal2 + "";
+                playerAction = ActionPl.STOP_GAME;
+                this.position.set(this.startPosition.x, this.startPosition.y);
+                this.target.set(this.startPosition.x, this.startPosition.y);
+            }
 
             //Kollision, sorgt dafür das der Ball im Spielfeld bleibt
             if (this.position.x + 10 > 1000 || this.position.x - 5 < 0) {
@@ -61,5 +97,7 @@ namespace Soccer {
             // crc2.fillStyle = "black";
             // crc2.closePath();
         }
+
+        
     }
 }

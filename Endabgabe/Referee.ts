@@ -6,7 +6,7 @@ namespace Soccer {
         protected velocity: Vector;
 
         constructor(_position?: Vector) {
-            super(_position); //Übernimmt aus der Superklasse
+            super(_position); //Get position from Superclass
             let x: number = 1000 * Math.random();
             let y: number = 600 * Math.random();
             let a: number = - Math.random();
@@ -28,5 +28,10 @@ namespace Soccer {
             crc2.fill();
             crc2.closePath();
         }
-    }
+
+
+        public move (): void {
+       //
+          }
+}
 }

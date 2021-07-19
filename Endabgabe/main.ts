@@ -15,16 +15,21 @@ namespace Soccer {
 
     let moveables: Moveable[] = [];
     let player: string[] = [];
+    let formArray1: string[] = [];
+    let formArray2: string[] = [];
+    //let substitute: string[] = [];
+
 
     let form: HTMLElement;
     let startButton: HTMLElement;
-    let playerStats: HTMLElement;
+
 
     let ball: Ball;
 
-    let timeOut: boolean = false; //andere benennung
+    let timeOut: boolean = false; 
 
     export let playerAction: ActionPl = ActionPl.GOTO_BALL;
+
 
     function handleLoad(_event: Event): void {
 
@@ -50,12 +55,7 @@ namespace Soccer {
 
         startButton = <HTMLElement>document.querySelector("#startButton");
         startButton.addEventListener("click", createPlayer);
-
-        // playerStats = <HTMLElement>document.getElementById("playerStats");
-        // playerStats?.addEventListener("change", displayPlayerStats);
-
         canvas.addEventListener("click", getClickPosition);
-
         canvas.addEventListener("keydown", playSound);
 
 
@@ -63,31 +63,115 @@ namespace Soccer {
 
     }
 
-    function playSound(_event: KeyboardEvent): void {
-        console.log("key down");
-        let audio: HTMLAudioElement = new Audio();
-        audio.play();
+
+    function drawSoccerField(): void {
+
+        //Grasfield
+        crc2.beginPath();
+        crc2.fillStyle = "lightgreen";
+        crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+        crc2.closePath();
+
+        //Middleline
+        crc2.beginPath();
+        crc2.moveTo(crc2.canvas.width / 2, 0);
+        crc2.lineTo(crc2.canvas.width / 2, 600);
+        crc2.strokeStyle = "white";
+        crc2.stroke();
+        crc2.closePath();
+
+        //Middlecircle
+        crc2.beginPath();
+        crc2.arc(crc2.canvas.width / 2, crc2.canvas.height / 2, 100, 0, 2 * Math.PI);
+        crc2.stroke();
+        crc2.closePath();
+
+        //Dot
+        crc2.beginPath();
+        crc2.arc(crc2.canvas.width / 2, crc2.canvas.height / 2, 5, 0, 2 * Math.PI);
+        crc2.fillStyle = "white";
+        crc2.fill();
+        crc2.closePath();
+
+        //litte Gate right
+        crc2.beginPath();
+        crc2.moveTo(crc2.canvas.width, crc2.canvas.height / 2 - 50);
+        crc2.lineTo(crc2.canvas.width - 50, crc2.canvas.height / 2 - 50);
+        crc2.lineTo(crc2.canvas.width - 50, crc2.canvas.height / 2 + 50);
+        crc2.lineTo(crc2.canvas.width, crc2.canvas.height / 2 + 50);
+        crc2.stroke();
+        crc2.closePath();
+
+        //big Gate right
+        crc2.beginPath();
+        crc2.moveTo(crc2.canvas.width, crc2.canvas.height / 2 - 150);
+        crc2.lineTo(crc2.canvas.width - 150, crc2.canvas.height / 2 - 150);
+        crc2.lineTo(crc2.canvas.width - 150, crc2.canvas.height / 2 + 150);
+        crc2.lineTo(crc2.canvas.width, crc2.canvas.height / 2 + 150);
+        crc2.stroke();
+        crc2.closePath();
+
+        //half circle right
+        crc2.beginPath();
+        crc2.arc(870, crc2.canvas.height / 2, 60, 1.9, 1.39 * Math.PI);
+        crc2.strokeStyle = "white";
+        crc2.stroke();
+        crc2.closePath();
+
+
+
+
+        //litte Gate left
+        crc2.beginPath();
+        crc2.moveTo(0, crc2.canvas.height / 2 + 50);
+        crc2.lineTo(50, crc2.canvas.height / 2 + 50);
+        crc2.lineTo(50, crc2.canvas.height / 2 - 50);
+        crc2.lineTo(0, crc2.canvas.height / 2 - 50);
+        crc2.stroke();
+        crc2.closePath();
+
+
+        //big Gate left
+        crc2.beginPath();
+        crc2.moveTo(0, crc2.canvas.height / 2 + 150);
+        crc2.lineTo(150, crc2.canvas.height / 2 + 150);
+        crc2.lineTo(150, crc2.canvas.height / 2 - 150);
+        crc2.lineTo(0, crc2.canvas.height / 2 - 150);
+        crc2.stroke();
+        crc2.closePath();
+
+
+        //half circle left
+        crc2.beginPath();
+        crc2.arc(130, crc2.canvas.height / 2, 60, 5.05, 2.39 * Math.PI);
+        crc2.strokeStyle = "white";
+        crc2.stroke();
+        crc2.closePath();
     }
 
-    function handleChange(_event: Event): void {
-        _event.preventDefault();
-        let formData: FormData = new FormData(document.forms[0]);
-        player = [];
-
-
-        for (let entry of formData) {
-            player.push(String(entry[1]));
-
+    function createReferee(nReferee: number): void {
+        for (let i: number = 0; i < nReferee; i++) {
+            let referee: Referee = new Referee();
+            moveables.push(referee);
         }
     }
 
-    function getClickPosition(_event: MouseEvent): void {
-        let position: Vector = new Vector(_event.clientX - crc2.canvas.offsetLeft, _event.clientY - crc2.canvas.offsetTop);
-        ball.target = position;
-        playerAction = ActionPl.FLYING_BALL;
+    function createLinesman(_nLinesman: number): void {
+        for (let i: number = 0; i < _nLinesman; i++) {
+            let firstLinesman: Linesman = new Linesman();
+            firstLinesman.position.x = 900 * Math.random(); // setzt position.x von Linesman
+            firstLinesman.position.y = 7;
+            firstLinesman.velocity.x = Math.random();
+            firstLinesman.velocity.y = 0;
+            moveables.push(firstLinesman); //Werte des ersten Linienrichters in das Array pushen
+
+            let secondLinesman: Linesman = new Linesman();
+            moveables.push(secondLinesman);
+        }
     }
 
-    function createPlayer(): void {
+
+    function createPlayer(_event: MouseEvent): void {
 
         let element: HTMLInputElement = <HTMLInputElement>document.getElementById("startButton");
         element.disabled = true; // Das HTMLInputElement
@@ -270,6 +354,7 @@ namespace Soccer {
                 player1Team2.precision = getRandomPrecision(Number(player[4]), Number(player[5]));
 
                 moveables.push(player1Team2);
+                console.log(player1Team2);
             }
             //up right
             if (i == 12) {
@@ -439,77 +524,171 @@ namespace Soccer {
 
         let select1: HTMLSelectElement = document.createElement("select");
         select1.setAttribute("id", "select1");
-        select1.addEventListener("change", displayPlayerStats);
+        form.addEventListener("change", displayPlayerStats1);
+        select1.name = "team1Selection";
         fieldset.appendChild(select1);
+
+        let formDiv2: HTMLDivElement = document.createElement("div");
+        document.body.appendChild(formDiv2);
+        formDiv2.appendChild(form);
+
+
 
         for (let i: number = 1; i < 12; i++) {
             let option: HTMLOptionElement = document.createElement("option");
             option.text = "Player" + i;
+            option.value = i + "";
             select1.add(option);
 
         }
 
         let form2: HTMLFormElement = document.createElement("form");
-        form2.classList.add("style");
         document.body.appendChild(form2);
 
         let fieldset2: HTMLFieldSetElement = document.createElement("fieldset");
-        form.appendChild(fieldset2);
+        form2.appendChild(fieldset2);
 
         let legend2: HTMLElement = document.createElement("legend");
         legend2.innerHTML = "Player Stats - Team 2";
         fieldset2.appendChild(legend2);
 
         let select2: HTMLSelectElement = document.createElement("select");
-        select2.addEventListener("change", displayPlayerStats);
-        select1.setAttribute("id", "select1");
+        form2.addEventListener("change", displayPlayerStats2);
+        select2.setAttribute("id", "select1");
+        select2.name = "team2Slection";
         fieldset2.appendChild(select2);
 
         for (let i: number = 1; i < 12; i++) {
             let option: HTMLOptionElement = document.createElement("option");
             option.text = "Player" + i;
+            option.value = i + "";
             select2.add(option);
+
         }
 
         let formDiv: HTMLDivElement = document.createElement("div");
-        formDiv.style.float = "right";
-        formDiv.style.borderColor = "black";
-        formDiv.style.borderStyle = "groove";
-        formDiv.style.borderRadius = "2%";
-        formDiv.style.marginRight = "2%";
-        formDiv.style.position = "absolut";
         document.body.appendChild(formDiv);
-        formDiv.appendChild(form);
+        formDiv.appendChild(form2);
+
+
+
 
     }
 
-    function displayPlayerStats(): void {
-        let div: HTMLElement = document.createElement("div");
-        div.innerHTML = "PLAYER STATS";
-        document.body.appendChild(div);
-
-        // let div: HTMLSelectElement = document.querySelector("div");
-        // for (let i: number = 0; i > div.options.length; i++) {
-        // if (div.options[i].text == "Player 1") { //wenn die option ausgewählt wurde wird
-        // playerStats.innerHTML = "I AM PLAYER1"; // das angezeigt
-        // }
-        // }
-
-        let select: HTMLSelectElement = <HTMLSelectElement> document.querySelector("#select1");
-        for (let i: number = 0; i > select.options.length; i++) {
-            if (select.options[i].text == "Player1Team1") {
-                playerStats.innerHTML = "I AM PLAYER 1";
-                div.appendChild(playerStats);
-            }
-            if (select.options[i].text == "Player1Team1")   {
-                playerStats.innerHTML = "I AM PLAYER";
-            }
+    function handleChange(_event: Event): void {
+        _event.preventDefault();
+        let formData: FormData = new FormData(document.forms[0]);
+        player = [];
 
 
-           }
+        for (let entry of formData) {
+            player.push(String(entry[1]));
 
-        
         }
+    }
+
+    function getClickPosition(_event: MouseEvent): void {
+        let clickPosition: Vector = new Vector(_event.clientX - crc2.canvas.offsetLeft, _event.clientY - crc2.canvas.offsetTop);
+        ball.target = clickPosition; //= position vom Ball
+        playerAction = ActionPl.FLYING_BALL;
+    }
+
+
+    function displayPlayerStats1(_event: Event): void {
+
+        let div: HTMLDivElement = <HTMLDivElement>document.getElementById("playerStats");
+
+        _event.preventDefault(); //Default event ist nicht gültig
+        let formData: FormData = new FormData(document.forms[2]); //forms 2 also das 3. Formelement
+       
+
+        for (let entry of formData) {
+            formArray1.push(String(entry[1]));
+        }
+
+        for (let i: number = 0; i < moveables.length; i++) {
+            let player: Moveable = moveables[i];
+            if (player instanceof Player) {
+                if (player.jerseynumber == formArray1[0] && player.colorTeamOne) {  //geht alle spieler durch und frägt ab ob welcher spieler ausgewählt wird
+                    div.innerHTML = "<br> Player: " + player.jerseynumber + "<br> Position: " + Math.floor(player.position.x) + Math.floor(player.position.y) + "<br> Color: " + player.colorTeamOne + " <br> Velocity: " + player.velocity2;
+                }
+            }
+        }
+
+
+        //delete Button Team 1
+        let deleteButton1: HTMLButtonElement = document.createElement("button");
+        deleteButton1.innerHTML = "Remove Player";
+        div.appendChild(deleteButton1);
+        deleteButton1.addEventListener("click", deletePlayerTeam1);
+
+
+
+
+
+    }
+
+    function deletePlayerTeam1(_event: MouseEvent): void {
+        for (let b: number = 0; b < moveables.length; b++) {
+            let player1: Moveable = moveables[b];
+            //wenn player1 eine instanceof Player ist
+            if (player1 instanceof Player) {
+                if (player1.jerseynumber == formArray1[0] && player1.colorTeamOne) {
+                    moveables.splice(b, 1);
+                }
+            }
+        }
+    }
+
+    function displayPlayerStats2(_event: Event): void {
+
+        let div: HTMLDivElement = <HTMLDivElement>document.getElementById("playerStats");
+
+        _event.preventDefault();
+        let formData: FormData = new FormData(document.forms[1]); //forms 1 also das 2. Formelement
+        formArray2 = [];
+
+        for (let entry of formData) {
+            formArray2.push(String(entry[1]));
+        }
+
+        for (let i: number = 0; i < moveables.length; i++) {
+            let player: Moveable = moveables[i];
+            if (player instanceof Player) {
+
+                if (player.jerseynumber == formArray2[0] && player.colorTeamTwo) {  //geht alle spieler durch und frägt ab ob welcher spieler ausgewählt wird
+                    div.innerHTML = "Player: " + player.jerseynumber + "<br> Position: " + Math.floor(player.position.x) + Math.floor(player.position.y) + "<br> Color: " + player.colorTeamTwo + "<br> Velocity: " + player.velocity2;
+                }
+            }
+
+        }
+
+        //DELETE BUTTON TEAM 2
+        let deleteButton2: HTMLButtonElement = document.createElement("button");
+        deleteButton2.innerHTML = "Remove Player";
+        div.appendChild(deleteButton2);
+        deleteButton2.addEventListener("click", deletePlayerTeam2);
+
+
+
+    }
+
+    function deletePlayerTeam2(_event: MouseEvent): void {
+        for (let b: number = 0; b < moveables.length; b++) {
+            let player2: Moveable = moveables[b];
+            //wenn player2 eine instanceof Player ist
+            if (player2 instanceof Player) {
+                if (player2.jerseynumber == formArray2[0] && player2.colorTeamTwo) {
+                    moveables.splice(b, 1);
+                }
+            }
+        }
+    }
+
+    function playSound(_event: KeyboardEvent): void {
+        let audio: HTMLAudioElement = new Audio("crowd.wav");
+        audio.play();
+    }
 
     function getRandomVelocity(_min: number, _max: number): number {
         let velocity: number = _max - _min;
@@ -533,148 +712,34 @@ namespace Soccer {
         return answer;
     }
 
-    function createLinesman(_nLinesman: number): void {
-        for (let i: number = 0; i < _nLinesman; i++) {
-            let firstLinesman: Linesman = new Linesman();
-            firstLinesman.position.x = 900 * Math.random(); // setzt position.x von Linesman
-            firstLinesman.position.y = 7;
-            firstLinesman.velocity.x = Math.random();
-            firstLinesman.velocity.y = 0;
-            moveables.push(firstLinesman); //Werte des ersten Linienrichters in das Array pushen
 
-            let secondLinesman: Linesman = new Linesman();
-            moveables.push(secondLinesman);
-        }
-    }
+    function update(_soccerField: ImageData): void { //wird in der handle load alle 20 Millisekunden aufgerufen
+        crc2.putImageData(_soccerField, 0, 0); //abgespeichertes Bild vom Spielfeld wird als Bild eingefügt --> speicherung in handleLoad
+        let posBall: Vector = ball.position; //Ball position wird zugewiesen übergabe Parameter MoveToBall
 
-    function createReferee(nReferee: number): void {
-        for (let i: number = 0; i < nReferee; i++) {
-            let referee: Referee = new Referee();
-            moveables.push(referee);
-        }
-    }
-
-    function drawSoccerField(): void {
-
-        //Grasfield
-        crc2.beginPath();
-        crc2.fillStyle = "lightgreen";
-        crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
-        crc2.closePath();
-
-        //Middleline
-        crc2.beginPath();
-        crc2.moveTo(crc2.canvas.width / 2, 0);
-        crc2.lineTo(crc2.canvas.width / 2, 600);
-        crc2.strokeStyle = "white";
-        crc2.stroke();
-        crc2.closePath();
-
-        //Middlecircle
-        crc2.beginPath();
-        crc2.arc(crc2.canvas.width / 2, crc2.canvas.height / 2, 100, 0, 2 * Math.PI);
-        crc2.stroke();
-        crc2.closePath();
-
-        //Dot
-        crc2.beginPath();
-        crc2.arc(crc2.canvas.width / 2, crc2.canvas.height / 2, 5, 0, 2 * Math.PI);
-        crc2.fillStyle = "white";
-        crc2.fill();
-        crc2.closePath();
-
-        //litte Gate right
-        crc2.beginPath();
-        crc2.moveTo(crc2.canvas.width, crc2.canvas.height / 2 - 50);
-        crc2.lineTo(crc2.canvas.width - 50, crc2.canvas.height / 2 - 50);
-        crc2.lineTo(crc2.canvas.width - 50, crc2.canvas.height / 2 + 50);
-        crc2.lineTo(crc2.canvas.width, crc2.canvas.height / 2 + 50);
-        crc2.stroke();
-        crc2.closePath();
-
-        //big Gate right
-        crc2.beginPath();
-        crc2.moveTo(crc2.canvas.width, crc2.canvas.height / 2 - 150);
-        crc2.lineTo(crc2.canvas.width - 150, crc2.canvas.height / 2 - 150);
-        crc2.lineTo(crc2.canvas.width - 150, crc2.canvas.height / 2 + 150);
-        crc2.lineTo(crc2.canvas.width, crc2.canvas.height / 2 + 150);
-        crc2.stroke();
-        crc2.closePath();
-
-        //half circle right
-        crc2.beginPath();
-        crc2.arc(870, crc2.canvas.height / 2, 60, 1.9, 1.39 * Math.PI);
-        crc2.strokeStyle = "white";
-        crc2.stroke();
-        crc2.closePath();
-
-
-
-
-        //litte Gate left
-        crc2.beginPath();
-        crc2.moveTo(0, crc2.canvas.height / 2 + 50);
-        crc2.lineTo(50, crc2.canvas.height / 2 + 50);
-        crc2.lineTo(50, crc2.canvas.height / 2 - 50);
-        crc2.lineTo(0, crc2.canvas.height / 2 - 50);
-        crc2.stroke();
-        crc2.closePath();
-
-
-        //big Gate left
-        crc2.beginPath();
-        crc2.moveTo(0, crc2.canvas.height / 2 + 150);
-        crc2.lineTo(150, crc2.canvas.height / 2 + 150);
-        crc2.lineTo(150, crc2.canvas.height / 2 - 150);
-        crc2.lineTo(0, crc2.canvas.height / 2 - 150);
-        crc2.stroke();
-        crc2.closePath();
-
-
-        //half circle left
-        crc2.beginPath();
-        crc2.arc(130, crc2.canvas.height / 2, 60, 5.05, 2.39 * Math.PI);
-        crc2.strokeStyle = "white";
-        crc2.stroke();
-        crc2.closePath();
-    }
-
-    function update(_soccerField: ImageData): void {
-        crc2.putImageData(_soccerField, 0, 0);
-        let posBall: Vector = ball.position;
-
-        for (let moveable of moveables) {
+        for (let moveable of moveables) { // Jedes Moveable wird gezeichnet --> Referee, Linesman, Ball, Spieler
             moveable.draw();
         }
 
         switch (playerAction) {
             case ActionPl.GOTO_BALL:
-
-
                 for (let moveable of moveables) {
-                    moveable.move(1);
-                    moveable.moveToBall(posBall); //den Ball brauchen nur die Spieler
-            
+                    moveable.move(1, posBall);
                 }
-
-
-
                 break;
 
             case ActionPl.STOP_GAME:
                 break; //damit sich der Ball nicht mehr bewegt
 
-            case ActionPl.CHANGE_PLAYER:
             case ActionPl.FLYING_BALL:
 
                 if (timeOut == false) {
-                    setTimeout(handleTimeOut, 1000 / 2); //For the Referee
+                    setTimeout(handleTimeOut, 500); //Der Spieler rennt nicht direkt zum Ball wenn er sich bewegt --> danach wird GOTO_BALL aufgerufen
                     timeOut = true;
                 }
 
-                ball.move(1);
+                ball.move(1); //Nur der Ball bewegt sich
         }
-
 
     }
 

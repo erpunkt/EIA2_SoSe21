@@ -20,8 +20,8 @@ var Soccer;
             this.velocity = new Soccer.Vector(a, b);
         }
         move(_timeslice) {
-            this.position.add(this.velocity);
-            //mit Kollision
+            this.position.add(this.velocity); //Add Velocity to Position
+            //Kollusion, that the Linesman dont move out of the canvas
             if (this.position.x + 10 > 1000 || this.position.x - 5 < 0) {
                 this.velocity.x = -this.velocity.x;
             }

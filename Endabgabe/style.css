@@ -8,16 +8,17 @@ body{
 
 }
 #header{
-  margin-top: 3%;
+  margin-top: 2%;
+margin-left: -30%;
+margin-right: 1%;
 }
-
-
 
 #formField{
     font-size: 20px;
-    float: left;
-    
-    margin-top: 3%;
+    float: right;
+    margin-top: 20%;
+    margin-right:25%;
+    margin-bottom: 2%;
     border-color: black;
     border-style: groove;
     border-radius: 2%;
@@ -27,8 +28,10 @@ body{
     
     }
 
+
+
 canvas {
-margin-top: 3%;
+margin-top: 18%;
 border-color: black;
 border-style: double;
 border-radius: 2%;
@@ -37,10 +40,10 @@ border-radius: 2%;
 
 
 
-
 div{
+margin-top: 5%;
+margin-right: -30%;
 font-size: 20px;
-float: left;
 border-color: black;
 border-style: groove;
 border-radius: 2%;
@@ -48,6 +51,19 @@ border-top: 2%;
 border-bottom: -10%;
 padding: 2%;
 height: 20%;
+}
+
+#playerStats{
+  margin-top: 5%;
+  margin-right: -30%;
+  font-size: 20px;
+  float: left;
+  border-color: black;
+  border-style: groove;
+  border-radius: 2%;
+  border-top: 2%;
+  border-bottom: -10%;
+  padding: 2%;
 }
 
 footer {

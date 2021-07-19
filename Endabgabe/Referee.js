@@ -6,7 +6,7 @@ var Soccer;
         color;
         velocity;
         constructor(_position) {
-            super(_position); //Übernimmt aus der Superklasse
+            super(_position); //Get position from Superclass
             let x = 1000 * Math.random();
             let y = 600 * Math.random();
             let a = -Math.random();
@@ -25,6 +25,9 @@ var Soccer;
             Soccer.crc2.fillStyle = this.color;
             Soccer.crc2.fill();
             Soccer.crc2.closePath();
+        }
+        move() {
+            //
         }
     }
     Soccer.Referee = Referee;

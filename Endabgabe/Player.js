@@ -31,6 +31,7 @@ var Soccer;
         }
         //Größe der Spieler
         draw() {
+            //Team One
             Soccer.crc2.beginPath();
             Soccer.crc2.arc(this.position.x, this.position.y, 10, 0, 2 * Math.PI);
             Soccer.crc2.fillStyle = this.colorTeamOne;
@@ -39,6 +40,7 @@ var Soccer;
             Soccer.crc2.textAlign = "center";
             Soccer.crc2.strokeStyle = "white";
             Soccer.crc2.closePath();
+            //Team Two
             Soccer.crc2.beginPath();
             Soccer.crc2.arc(this.position.x, this.position.y, 10, 0, 2 * Math.PI);
             Soccer.crc2.fillStyle = this.colorTeamTwo;
@@ -47,19 +49,15 @@ var Soccer;
             Soccer.crc2.textAlign = "center";
             Soccer.crc2.strokeStyle = "white";
             Soccer.crc2.closePath();
-            // crc2.beginPath();
-            // crc2.arc(this.position.x, this.position.y, 100, 0, 2 * Math.PI);
-            // crc2.stroke();
-            // crc2.closePath();
         }
-        moveToBall(_positionBall) {
+        move(_timeslice, _positionBall) {
             let positionBall = _positionBall;
             let posX = positionBall.x - this.position.x;
             let posY = positionBall.y - this.position.y;
             let radi = Math.hypot(posY, posX);
             let xdefaultPos = this.startPosition.x;
             let ydefaultPos = this.startPosition.y;
-            if (radi <= 200) { //200 Pixel ist der Wahrnehmungsradius übers Spielfeld
+            if (radi <= 200) { //200 Pixel ist der Wahrnehmungsradius übers Spielfeld, Dann bewegt sich der Spieler zum Ball
                 let position = new Soccer.Vector(posX, posY);
                 position.scale(this.velocity2 / radi);
                 this.position.add(position);
@@ -72,11 +70,6 @@ var Soccer;
             if (radi > 200) {
                 this.position.set(xdefaultPos, ydefaultPos);
             }
-            // } else {
-            //     let position: Vector = new Vector (xdefaultPos, ydefaultPos);
-            //     position.scale(this.velocity2 / radi);
-            //     this.position.add(position);
-            // }
         }
     }
     Soccer.Player = Player;

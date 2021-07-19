@@ -16,7 +16,7 @@ namespace Soccer {
       this.startPosition = new Vector(x, y);
     }
 
-    public move(_timeslice: number): void {
+    public move (_timeslice?: number, _positionBall?: Vector): void {
       this.position.add(this.velocity);
 
       //mit Kollision
@@ -28,9 +28,9 @@ namespace Soccer {
       }
     }
 
-    public moveToBall(_positionBall: Vector): void {
-      //
-    }
+    // public moveToBall(_positionBall: Vector): void {
+    //   //
+    // }
 
     public draw(): void {
       //Test

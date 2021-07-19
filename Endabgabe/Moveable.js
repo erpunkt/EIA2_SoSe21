@@ -12,7 +12,7 @@ var Soccer;
             this.position = new Soccer.Vector(x, y);
             this.startPosition = new Soccer.Vector(x, y);
         }
-        move(_timeslice) {
+        move(_timeslice, _positionBall) {
             this.position.add(this.velocity);
             //mit Kollision
             if (this.position.x + 10 > 1000 || this.position.x - 5 < 0) {
@@ -22,9 +22,9 @@ var Soccer;
                 this.velocity.y = -this.velocity.y;
             }
         }
-        moveToBall(_positionBall) {
-            //
-        }
+        // public moveToBall(_positionBall: Vector): void {
+        //   //
+        // }
         draw() {
             //Test
         }

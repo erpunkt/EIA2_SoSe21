@@ -30,11 +30,11 @@ namespace Soccer {
         }
 
         //ball radius
-        public move(_timeslice: number, _precision?: number): void {
+        public move(_timeslice?: number): void {
 
             this.position.add(this.velocity);
             let differenceVector: Vector = Vector.getDifference(this.target, this.position); //weil static
-            this.velocity = new Vector(differenceVector.x / 10, differenceVector.y / 10); //der Vector zwischen ziel und punkt des balles ist der difference Vector. Die Geschiwndigkeit ist die x Richtung dadurch wird die strecke geteilt. Geschwidnigkeit wird dann in Richtung der Click Position gesetzt. Hier 1/10
+            this.velocity = new Vector(differenceVector.x / 10, differenceVector.y / 10); //der Vector zwischen Ziel und Punkt des balles ist der difference Vector. Die Geschiwndigkeit ist die x Richtung dadurch wird die strecke geteilt. Geschwidnigkeit wird dann in Richtung der Click Position gesetzt. Hier 1/10
             this.position.add(this.velocity);
 
             //gate first Team, left
@@ -54,7 +54,7 @@ namespace Soccer {
             }
 
 
-            if (radiL <= 45) { //wenn Radius kleiner gleich 100
+            if (radiL <= 45) { //wenn Radius vom linken Tor kleiner gleich 45, wird das spiel Angehalten und der Ball geht zurück zur Startposition.
                 this.goalLeft = <HTMLElement>document.querySelector("#goalTeam1");
                 this.goal1++;
                 this.goalLeft.innerHTML = this.goal1 + "";
@@ -63,7 +63,7 @@ namespace Soccer {
                 this.target.set(this.startPosition.x, this.startPosition.y);
             }
 
-            if (radiR <= 45) {
+            if (radiR <= 45) { //wenn Radius vom rechten Tor kleiner gleich 45, wird das spiel Angehalten und der Ball geht zurück zur Startposition.
                 this.goalRight = <HTMLElement>document.querySelector("#goalTeam2");
                 this.goal2++;
                 this.goalRight.innerHTML = this.goal2 + "";
@@ -88,14 +88,6 @@ namespace Soccer {
             crc2.fillStyle = this.color;
             crc2.fill();
             crc2.closePath();
-
-            // //Linien auf dem Ball
-            // crc2.beginPath();
-            // crc2.lineTo(this.position.x , this.position.y );
-            // crc2.moveTo(this.position.x + 7, this.position.y + 7 );
-            // crc2.moveTo
-            // crc2.fillStyle = "black";
-            // crc2.closePath();
         }
 
         

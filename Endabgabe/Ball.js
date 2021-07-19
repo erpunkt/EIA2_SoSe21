@@ -25,10 +25,10 @@ var Soccer;
             this.velocity = new Soccer.Vector(a, b);
         }
         //ball radius
-        move(_timeslice, _precision) {
+        move(_timeslice) {
             this.position.add(this.velocity);
             let differenceVector = Soccer.Vector.getDifference(this.target, this.position); //weil static
-            this.velocity = new Soccer.Vector(differenceVector.x / 10, differenceVector.y / 10); //der Vector zwischen ziel und punkt des balles ist der difference Vector. Die Geschiwndigkeit ist die x Richtung dadurch wird die strecke geteilt. Geschwidnigkeit wird dann in Richtung der Click Position gesetzt. Hier 1/10
+            this.velocity = new Soccer.Vector(differenceVector.x / 10, differenceVector.y / 10); //der Vector zwischen Ziel und Punkt des balles ist der difference Vector. Die Geschiwndigkeit ist die x Richtung dadurch wird die strecke geteilt. Geschwidnigkeit wird dann in Richtung der Click Position gesetzt. Hier 1/10
             this.position.add(this.velocity);
             //gate first Team, left
             let diffX1 = 0 - this.position.x; //Differenz berechnen von Ball posx und player posx
@@ -42,7 +42,7 @@ var Soccer;
                 this.velocity.x = 0;
                 this.velocity.y = 0;
             }
-            if (radiL <= 45) { //wenn Radius kleiner gleich 100
+            if (radiL <= 45) { //wenn Radius vom linken Tor kleiner gleich 45, wird das spiel Angehalten und der Ball geht zurück zur Startposition.
                 this.goalLeft = document.querySelector("#goalTeam1");
                 this.goal1++;
                 this.goalLeft.innerHTML = this.goal1 + "";
@@ -50,7 +50,7 @@ var Soccer;
                 this.position.set(this.startPosition.x, this.startPosition.y);
                 this.target.set(this.startPosition.x, this.startPosition.y);
             }
-            if (radiR <= 45) {
+            if (radiR <= 45) { //wenn Radius vom rechten Tor kleiner gleich 45, wird das spiel Angehalten und der Ball geht zurück zur Startposition.
                 this.goalRight = document.querySelector("#goalTeam2");
                 this.goal2++;
                 this.goalRight.innerHTML = this.goal2 + "";
@@ -73,13 +73,6 @@ var Soccer;
             Soccer.crc2.fillStyle = this.color;
             Soccer.crc2.fill();
             Soccer.crc2.closePath();
-            // //Linien auf dem Ball
-            // crc2.beginPath();
-            // crc2.lineTo(this.position.x , this.position.y );
-            // crc2.moveTo(this.position.x + 7, this.position.y + 7 );
-            // crc2.moveTo
-            // crc2.fillStyle = "black";
-            // crc2.closePath();
         }
     }
     Soccer.Ball = Ball;
